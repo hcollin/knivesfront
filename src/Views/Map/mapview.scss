@@ -1,0 +1,52 @@
+
+@mixin mapcalc($size) {
+  margin: 10px;
+
+  & > .row {
+    &:nth-child(even) {
+      left: $size / 2;
+    }
+    & > * {
+      width: $size;
+      height: $size;
+    }
+  }
+}
+
+
+.mapview {
+
+  z-index: 10;
+
+  & > .row {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    left: 0;
+
+  }
+
+  &.zoom-further {
+    @include mapcalc(5px);
+  }
+
+  &.zoom-far{
+    @include mapcalc(20px);
+  }
+
+  &.zoom-normal {
+    @include mapcalc(40px);
+  }
+
+  &.zoom-near {
+    @include mapcalc(60px);
+  }
+
+  &.zoom-nearer {
+    @include mapcalc(100px);
+  }
+
+
+
+}

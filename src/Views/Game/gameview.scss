@@ -1,0 +1,39 @@
+
+.gameview {
+  position: relative;
+
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+  & > .controlpanel {
+    flex: 0 0 auto;
+    width: 240px;
+  }
+
+  & > .mainview {
+    flex: 1 1 auto;
+    overflow: hidden;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    & > .container {
+
+      position: relative;
+      top: 0;
+      left: 0;
+
+
+
+
+    }
+
+
+  }
+
+}

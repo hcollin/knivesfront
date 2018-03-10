@@ -1,0 +1,76 @@
+
+.mapcontrolsview {
+  position: absolute;
+
+  right: 10px;
+  top: 10px;
+
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 6px;
+
+
+  }
+
+  & > .cursors {
+
+    position: relative;
+    width: 96px;
+    height: 96px;
+
+
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    button {
+      width: 32px;
+      heigth: 32px;
+
+      flex: 0 0 auto;
+      margin: 0;
+
+      &.arrow-up, &.arrow-down {
+        margin: 0 32px;
+      }
+
+      &.arrow-left:before {
+        font-family: "FontAwesome";
+        content: "\f060";
+      }
+
+      &.arrow-right:before {
+        font-family: "FontAwesome";
+        content: "\f061";
+      }
+
+      &.arrow-up:before {
+        font-family: "FontAwesome";
+        content: "\f062";
+      }
+
+      &.arrow-down:before {
+        font-family: "FontAwesome";
+        content: "\f063";
+      }
+
+      &.center:before {
+        font-family: "FontAwesome";
+        content: "\f192";
+      }
+    }
+
+  }
+
+
+}

@@ -9,6 +9,7 @@
     & > * {
       width: $size;
       height: $size;
+
     }
   }
 }
@@ -29,22 +30,89 @@
 
   &.zoom-further {
     @include mapcalc(5px);
+
+    .city {
+
+      &:before {
+        font-size: 5px;
+      }
+
+      label {
+        display: none;
+      }
+
+      span {
+        font-size: 5px;
+      }
+    }
   }
 
   &.zoom-far{
     @include mapcalc(20px);
+
+    .city {
+
+      &:before {
+        font-size: 16px;
+      }
+      label {
+        display: none;
+      }
+    }
   }
 
   &.zoom-normal {
     @include mapcalc(40px);
+
+    .city {
+
+      &:before {
+        font-size: 32px;
+      }
+      label {
+        font-size: 6px;
+      }
+
+      span {
+        font-size: 20px;
+      }
+    }
   }
 
   &.zoom-near {
     @include mapcalc(60px);
+
+    .city {
+
+      &:before {
+        font-size: 40px;
+      }
+      label {
+        font-size: 8px;
+      }
+
+      span {
+        font-size: 24px;
+      }
+    }
   }
 
   &.zoom-nearer {
     @include mapcalc(100px);
+
+    .city {
+
+      &:before {
+        font-size: 60px;
+      }
+      label {
+        font-size: 10px;
+      }
+
+      span {
+        font-size: 32px;
+      }
+    }
   }
 
 

@@ -1,0 +1,65 @@
+@import "controlareas.scss";
+
+.hexinfoview {
+
+  @include controlarea(#88CC00);
+
+  div.hexinfo {
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+
+    div {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      &.coords {
+        display: flex;
+        flex-direction: column;
+        padding-right: 10px;
+        justify-content: center;
+        align-items: flex-end;
+
+        p {
+          text-align: right;
+          font-size: 10px;
+          color: #666;
+
+          span {
+            font-weight: bold;
+            font-size: 16px;
+            color: #000;
+            width: 20px;
+            display: inline-block;
+          }
+        }
+      }
+    }
+    h1 {
+      font-size: 20px;
+
+    }
+
+    h2.size {
+      float: right;
+
+    }
+
+    h3 {
+      font-size: 16px;
+      color: #666666;
+      font-style: italic;
+
+    }
+
+  }
+
+
+
+
+
+
+}

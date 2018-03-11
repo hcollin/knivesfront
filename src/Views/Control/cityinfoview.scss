@@ -1,0 +1,47 @@
+@import "controlareas.scss";
+
+.cityinfoview {
+
+  @include controlarea(#CC8800);
+
+  div.cityinfo {
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+
+    div {
+      flex: 1 1 auto;
+
+      &.size {
+        display: flex;
+        padding-right: 10px;
+        justify-content: flex-end;
+        align-items: center;
+      }
+    }
+    h1 {
+      font-size: 20px;
+
+    }
+
+    h2.size {
+      float: right;
+
+    }
+
+    h3 {
+      font-size: 16px;
+      color: #666666;
+      font-style: italic;
+
+    }
+
+  }
+
+
+
+
+
+
+}

@@ -26,6 +26,13 @@ export default class CityStore {
     constructor(options) {
         this.id = uuid.v4();
         this.name = options.name ? options.name : RANDOMCITYNAMES[Math.floor(Math.random()*RANDOMCITYNAMES.length)];
+        this.size = options.size ? options.size : 1;
+        this.x = options.x ? options.x : null;
+        this.y = options.y ? options.y : null;
+
+
+
     }
 }
+
 

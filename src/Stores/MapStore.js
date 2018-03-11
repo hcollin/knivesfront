@@ -1,6 +1,7 @@
 import { observable, action} from 'mobx';
 
 import HexStore from './HexStore';
+import CityStore from './CityStore';
 
 import { defaultMap } from '../Data/Maps/default';
 
@@ -71,12 +72,17 @@ class MapStore {
         }
         this.hexes = hexMap;
 
+        mapObject.cities.forEach(city => {
+           this.addCity(new CityStore(city));
+        });
+
     }
 
 
     @action
     addCity(city) {
         this.cities.push(city);
+        this.hexes[city.y][city.x].setCity(city);
     }
 
     @action
@@ -121,23 +127,5 @@ class MapStore {
     }
 
 }
-
-const DEFAULTMAP =
-    "WWWWWWLLLLLLWWW|" +
-    "WWWLLLLLLLLLLWW|" +
-    "WWLLLMMMMLLLLWW|" +
-    "WLLLMLLMMMLLLWW|" +
-    "LLLLLLLLLLLLLLW|" +
-    "LLLLLLWWLLLLLLL|" +
-    "LLLWWWWWLLLLLLL|" +
-    "LLLLWWWWWWLLLLL|" +
-    "LLLLLLWWWWWWLLL|" +
-    "LLLLLLWWLLLWWWL|" +
-    "LLLLLLWLLLLLLLW|" +
-    "LLLLLLLLLLLLLLL|" +
-    "LLLLLLLLLLLLLLL|" +
-    "LLLLLLWWWLLLLLL|" +
-    "LLLLWWWWWWLLLLL";
-
 
 export default new MapStore();

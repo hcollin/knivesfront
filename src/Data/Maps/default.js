@@ -22,7 +22,7 @@ const defaultMap = {
             name: "Helsinki",
             x: 3,
             y: 1,
-            size: 1
+            size: 2
         },
         {
             name: "Tampere",
@@ -40,7 +40,7 @@ const defaultMap = {
             name: "Stockholm",
             x: 10,
             y: 7,
-            size: 1
+            size: 2
         },
         {
             name: "Malmo",
@@ -53,6 +53,42 @@ const defaultMap = {
             x: 13,
             y: 6,
             size: 1
+        },
+        {
+            name: "Berlin",
+            x: 5,
+            y: 9,
+            size: 2
+        },
+        {
+            name: "Bonn",
+            x: 3,
+            y: 8,
+            size: 1
+        },
+        {
+            name: "Munchen",
+            x: 3,
+            y: 11,
+            size:1
+        },
+        {
+            name: "Bottlepeck",
+            x: 1,
+            y: 6,
+            size: 1
+        },
+        {
+            name: "Lootville",
+            x: 6,
+            y: 3,
+            size: 1
+        },
+        {
+            name: "Pillaburg",
+            x: 12,
+            y: 3,
+            size: 1
         }
     ],
     empires: [
@@ -60,15 +96,22 @@ const defaultMap = {
             name: "Finlande",
             color: "#4444FF",
             bgColor: "#FFFFFF",
-            capital: 0,
-            cities: [ 1, 2 ]
+            capital: "Helsinki",
+            cities: [ "Turku",  "Tampere" ]
         },
         {
             name: "Sverrige",
             color: "#FFFF44",
             bgColor: "#0000FF",
-            capital: 3,
-            cities: [4, 5]
+            capital: "Stockholm",
+            cities: ["Uppsala", "Malmo"]
+        },
+        {
+            name: "Germsmany",
+            color: "yellow",
+            bgColor: "red",
+            capital: "Berlin",
+            cities: ["Bonn", "Munchen"]
         }
     ]
 };

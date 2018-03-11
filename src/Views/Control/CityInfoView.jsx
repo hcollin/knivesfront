@@ -34,7 +34,7 @@ export default class CityInfoView extends React.Component {
                 <div className="cityinfo">
                     <div>
                         <h1>{city.name}</h1>
-                        <h3 className="owner">{city.owner ? city.owner : "Neutral"}</h3>
+                        <h3 className="owner">{city.owner ? city.owner.name : "Neutral"}</h3>
                     </div>
                     <div className="size">
                         <h2>{city.size}</h2>

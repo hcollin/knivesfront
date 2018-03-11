@@ -5,6 +5,7 @@ import './controlview.scss';
 import MyEmpireView from './MyEmpireView';
 import CityInfoView from './CityInfoView';
 import HexInfoView from './HexInfoView';
+import EmpireListView from './EmpireListView';
 
 import CityService from '../../Services/CityService';
 import MapStore from '../../Stores/MapStore';
@@ -25,6 +26,7 @@ export default class ControlView extends React.Component {
                 <MyEmpireView />
                 <HexInfoView />
                 <CityInfoView />
+                <EmpireListView />
             </div>
         )
     }

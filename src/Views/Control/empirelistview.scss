@@ -1,0 +1,46 @@
+
+@import "controlareas.scss";
+
+.empirelistview {
+
+  @include controlarea(#888888);
+
+  .empirelist {
+    display: flex;
+    flex-direction: column;
+
+    .empire {
+      display: flex;
+      flex-direction: row;
+
+      .name {
+        flex: 1;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px;
+      }
+
+      .relations, .communication {
+        flex: 0 0 auto;
+        width: 50px;
+        border-left: solid 2px rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+      }
+
+      .relations:before {
+        font-family: "FontAwesome";
+        content: "\f1e2"
+      }
+
+      .communication:before {
+        font-family: "FontAwesome";
+        content: "\f086"
+      }
+
+    }
+  }
+
+}

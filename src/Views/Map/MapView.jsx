@@ -15,7 +15,7 @@ export default class MapView extends React.Component {
 
     @action
     hexClick(hex) {
-        console.log("Clicked hex", hex.x, hex.y);
+        console.log("Clicked hex", hex.x, hex.y, hex);
         if(this.activeHex) {
             const oldId = this.activeHex.id;
             this.activeHex.deactivate();
@@ -29,6 +29,8 @@ export default class MapView extends React.Component {
         this.activeHex = hex;
         GameStore.setSelectedHex(hex);
     }
+
+
 
     render() {
 

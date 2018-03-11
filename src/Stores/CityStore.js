@@ -30,8 +30,11 @@ export default class CityStore {
         this.x = options.x ? options.x : null;
         this.y = options.y ? options.y : null;
 
+    }
 
-
+    @action
+    setOwner(empire) {
+        this.owner = empire;
     }
 }
 

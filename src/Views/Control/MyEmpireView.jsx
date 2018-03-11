@@ -25,8 +25,10 @@ export default class MyEmpireView extends React.Component {
                     <h1>{GameStore.activeEmpire.name}</h1>
                 </div>
                 <div className="gold">
-                    {GameStore.activeEmpire.gold}
-                    <label>Gold</label>
+                    <div className="value">
+                        {GameStore.activeEmpire.gold}
+                    </div>
+                    <div className="label">Gold</div>
                 </div>
 
             </div>

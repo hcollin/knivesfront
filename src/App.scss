@@ -11,6 +11,8 @@
   url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
 }
 
+@import url('https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700');
+
 * {
   padding: 0;
   margin: 0;
@@ -21,6 +23,9 @@
 
 html, body {
   height: 100%;
+  font-family: "Teko", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 
 
 

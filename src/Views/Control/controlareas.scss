@@ -12,7 +12,8 @@
 
     border-top: solid 3px rgba(0,0,0,0.3);
     width: 100%;
-    font-size: 10px;
+    font-size: 1em;
+    letter-spacing: 1px;
     text-transform: uppercase;
     padding: 5px 10px;
     margin: 0;
@@ -21,7 +22,7 @@
     background: linear-gradient(to right, ($c - 120) 0%, $c 40%, $c 97%, #444 100%);
 
     color: white;
-    font-weight: bold;
+    font-weight: 700;
     box-shadow: -2px 3px 5px 3px rgba(0,0,0,0.2);
 
   }
@@ -29,7 +30,7 @@
   div.message {
     position: relative;
     padding: 20px 10px 20px 10px;
-    font-size: 14px;
+    font-size: 1.3em;
     color: #666;
     display: flex;
     justify-content: center;

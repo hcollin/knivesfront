@@ -46,25 +46,26 @@
       content: "\f1ad";
       font-size: 40px;
 
+      user-select: none;
+
     }
 
     label {
       color: white;
-      font-size: 8px;
       position: absolute;
-      bottom: 5%;
+      bottom: 0%;
       left: 0;
       width: 100%;
       text-align: center;
       text-transform: uppercase;
-
+      user-select: none;
     }
 
     span {
       color: white;
       font-size: 12px;
       font-weight: bold;
-
+      user-select: none;
       position: absolute;
 
     }

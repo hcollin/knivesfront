@@ -1,0 +1,43 @@
+
+.myempireview {
+
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+
+  .name {
+    flex: 1 1 auto;
+    padding: 20px 0 20px 20px;
+    box-shadow: inset 0 0 10px 5px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+
+  }
+
+  .gold {
+    flex: 0 0 auto;
+    margin-left: -20px;
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 32px;
+    font-weight: 700;
+    background-color: #444;
+    border-top-left-radius: 20px 50%;
+    border-bottom-left-radius: 20px 50%;
+    color: gold;
+    box-shadow: -5px 0 5px 3px rgba(0,0,0,0.2);
+
+    position: relative;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+
+    label {
+      color: #AA8;
+      font-size: 16px;
+      font-weight: 400;
+      position: absolute;
+      bottom: 10px;
+    }
+  }
+}

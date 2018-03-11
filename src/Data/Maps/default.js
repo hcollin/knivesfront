@@ -58,11 +58,15 @@ const defaultMap = {
     empires: [
         {
             name: "Finlande",
+            color: "#4444FF",
+            bgColor: "#FFFFFF",
             capital: 0,
             cities: [ 1, 2 ]
         },
         {
             name: "Sverrige",
+            color: "#FFFF44",
+            bgColor: "#0000FF",
             capital: 3,
             cities: [4, 5]
         }

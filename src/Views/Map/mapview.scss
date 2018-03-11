@@ -70,7 +70,7 @@
         font-size: 32px;
       }
       label {
-        font-size: 6px;
+        font-size: 10px;
       }
 
       span {
@@ -88,8 +88,9 @@
         font-size: 40px;
       }
       label {
-        font-size: 8px;
+        font-size: 14px;
       }
+
 
       span {
         font-size: 24px;
@@ -106,7 +107,25 @@
         font-size: 60px;
       }
       label {
-        font-size: 10px;
+        font-size: 22px;
+      }
+
+      span {
+        font-size: 32px;
+      }
+    }
+  }
+
+  &.zoom-nearest {
+    @include mapcalc(150px);
+
+    .city {
+
+      &:before {
+        font-size: 60px;
+      }
+      label {
+        font-size: 22px;
       }
 
       span {

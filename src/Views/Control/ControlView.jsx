@@ -2,6 +2,7 @@ import React from 'react';
 
 import './controlview.scss';
 
+import MyEmpireView from './MyEmpireView';
 import CityInfoView from './CityInfoView';
 import HexInfoView from './HexInfoView';
 
@@ -18,9 +19,10 @@ export default class ControlView extends React.Component {
 
         return (
             <div className="controlview">
-                <div className="logo">
-                    Knives
+                <div className="knives">
+                    <span className="name">Knives</span>
                 </div>
+                <MyEmpireView />
                 <HexInfoView />
                 <CityInfoView />
             </div>

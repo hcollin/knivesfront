@@ -1,9 +1,11 @@
 import { observable, action} from 'mobx';
 
+
 import HexStore from './HexStore';
 import CityStore from './CityStore';
+import EmpireStore from './EmpireStore';
+import UnitStore from './UnitStore';
 
-import { defaultMap } from '../Data/Maps/default';
 
 class MapStore {
 
@@ -47,8 +49,8 @@ class MapStore {
     }
 
     @action
-    createMapFromData(mapObject=defaultMap) {
-        const rows = mapObject.map.split("|");
+    createMapFromData(mapObject) {
+        const rows = mapObject.split("|");
 
         this.height = rows.length;
         this.width = rows[0].length;
@@ -72,9 +74,15 @@ class MapStore {
         }
         this.hexes = hexMap;
 
-        mapObject.cities.forEach(city => {
-           this.addCity(new CityStore(city));
-        });
+        // mapObject.cities.forEach(city => {
+        //    this.addCity(new CityStore(city));
+        // });
+        //
+        // mapObject.empires.forEach(empireData => {
+        //     const empire = new EmpireStore(empireData);
+        //
+        //     console.log(empire);
+        // });
 
     }
 
@@ -94,7 +102,7 @@ class MapStore {
 
     @action
     zoomOut() {
-        if(this.currentZoom < 4) {
+        if(this.currentZoom < 5) {
             this.currentZoom++;
         }
 

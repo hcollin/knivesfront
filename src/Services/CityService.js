@@ -18,4 +18,10 @@ export default class CityService {
         });
     }
 
+    static getByName(name) {
+        return MapStore.cities.find(cs => {
+            return cs.name === name;
+        });
+    }
+
 }

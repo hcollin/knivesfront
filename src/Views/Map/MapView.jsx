@@ -41,7 +41,8 @@ export default class MapView extends React.Component {
             "zoom-far",
             "zoom-normal",
             "zoom-near",
-            "zoom-nearer"
+            "zoom-nearer",
+            "zoom-nearest"
         ];
 
         const style = {

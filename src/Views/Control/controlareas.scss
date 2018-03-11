@@ -1,8 +1,7 @@
-
 @mixin controlarea($c) {
 
-  border-top: solid 2px rgba(0,0,0,0.6);
-  border-bottom: solid 1px rgba(0,0,0,0.5);
+  border-top: solid 2px rgba(0, 0, 0, 0.6);
+  border-bottom: solid 1px rgba(0, 0, 0, 0.5);
 
   position: relative;
 
@@ -10,7 +9,7 @@
 
   div.title {
 
-    border-top: solid 3px rgba(0,0,0,0.3);
+    border-top: solid 3px rgba(0, 0, 0, 0.3);
     width: 100%;
     font-size: 1em;
     letter-spacing: 1px;
@@ -23,7 +22,7 @@
 
     color: white;
     font-weight: 700;
-    box-shadow: -2px 3px 5px 3px rgba(0,0,0,0.2);
+    box-shadow: -2px 3px 5px 3px rgba(0, 0, 0, 0.2);
 
   }
 
@@ -47,4 +46,70 @@
     }
   }
 
+  div.commands {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 10px 4px rgba(0, 0, 0, 0.2);
+
+    div.buttons {
+
+      flex: 0 0 auto;
+      width: 96px;
+      border-right: solid 1px rgba(0, 0, 0, 0.5);
+
+      button.build {
+        @include iconAndTextButton('\f085');
+      }
+
+      button.heal {
+        @include iconAndTextButton('\f0fa');
+      }
+
+      button.infra {
+        @include iconAndTextButton('\f1ad');
+      }
+
+    }
+
+    div.current {
+      flex: 1;
+      padding: 0 6px;
+
+    }
+  }
+
+}
+
+@mixin iconAndTextButton($icon) {
+  margin-bottom: 3px;
+  width: 90px;
+  font-size: 14px;
+  padding: 5px 5px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-weight: 600;
+  font-family: "Teko";
+
+  background: linear-gradient(#AAA 0%, #FFF 50%, #AAA 100%);
+  border-radius: 6px;
+
+  box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 0.2);
+
+  &.current {
+    background: linear-gradient(#8B8 0%, #EFE 50%, #8B8 100%);
+
+  }
+
+  &:before {
+    font-family: "FontAwesome";
+    font-size: 20px;
+    font-weight: normal;
+    margin-right: 6px;
+    content: $icon;
+  }
 }

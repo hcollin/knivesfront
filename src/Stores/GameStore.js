@@ -8,6 +8,8 @@ import CityService from '../Services/CityService';
 
 class GameStore {
 
+    @observable turn = 0;
+
     @observable selectedHex = null;
     @observable empires = [];
     @observable map = null;
@@ -45,8 +47,18 @@ class GameStore {
     }
 
     @action
+    setTurn(turn) {
+        this.turn = turn;
+    }
+
+    @action
     setSelectedHex(hex) {
         this.selectedHex = hex;
+    }
+
+    @action
+    setActiveEmpire(empire) {
+        this.activeEmpire = empire;
     }
 
     @action

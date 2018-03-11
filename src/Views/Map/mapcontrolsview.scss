@@ -18,6 +18,20 @@
     height: 32px;
     margin-bottom: 6px;
 
+    border-radius: 6px;
+
+    box-shadow: inset 0 0 10px 2px rgba(0,0,0,0.3);
+
+    &.plus:before {
+      font-family: "FontAwesome";
+      content: '\f067';
+    }
+
+    &.minus:before {
+      font-family: "FontAwesome";
+      content: '\f068';
+    }
+
 
   }
 
@@ -35,10 +49,13 @@
 
     button {
       width: 32px;
-      heigth: 32px;
+      height: 32px;
 
       flex: 0 0 auto;
       margin: 0;
+
+
+
 
       &.arrow-up, &.arrow-down {
         margin: 0 32px;

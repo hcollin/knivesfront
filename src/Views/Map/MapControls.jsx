@@ -50,8 +50,8 @@ export default class MapControlsView extends React.Component {
     render() {
         return(
             <div className="mapcontrolsview">
-                <button onClick={() => this.zoomOut()}>+</button>
-                <button onClick={() => this.zoomIn()}>-</button>
+                <button className="plus" onClick={() => this.zoomOut()} />
+                <button className="minus" onClick={() => this.zoomIn()} />
 
                 <div className="cursors">
                     <button onClick={() => this.panUp()} className="arrow-up" />

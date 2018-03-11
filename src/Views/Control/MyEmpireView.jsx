@@ -1,10 +1,12 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 
 import GameStore from '../../Stores/GameStore';
 
 
 import './myempireview.scss';
 
+@observer
 export default class MyEmpireView extends React.Component {
 
 

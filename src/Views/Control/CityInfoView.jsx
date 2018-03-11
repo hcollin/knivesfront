@@ -10,9 +10,11 @@ import './cityinfoview.scss';
 @observer
 export default class CityInfoView extends React.Component {
 
+
+
+
+
     render() {
-
-
 
         if(!GameStore.selectedHex || !GameStore.selectedHex.city) {
             return (
@@ -26,7 +28,7 @@ export default class CityInfoView extends React.Component {
         }
 
         const city = GameStore.selectedHex.city;
-
+        const showActions = city.owner && city.owner.id === GameStore.activeEmpire.id;
 
         return (
             <div className="cityinfoview">
@@ -40,6 +42,21 @@ export default class CityInfoView extends React.Component {
                         <h2>{city.size}</h2>
                     </div>
                 </div>
+
+                {showActions &&
+                <div className="commands">
+                    <div className="buttons">
+                        <button className="build current">Build</button>
+                        <button className="heal">Heal</button>
+                        <button className="infra">Grow</button>
+                    </div>
+                    <div className="current">
+                        Current Command
+                    </div>
+
+                </div>
+                }
+
 
 
 

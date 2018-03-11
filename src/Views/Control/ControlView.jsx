@@ -9,6 +9,7 @@ import EmpireListView from './EmpireListView';
 
 import CityService from '../../Services/CityService';
 import MapStore from '../../Stores/MapStore';
+import NextTurnView from "./NextTurnView";
 
 export default class ControlView extends React.Component {
 
@@ -27,6 +28,10 @@ export default class ControlView extends React.Component {
                 <HexInfoView />
                 <CityInfoView />
                 <EmpireListView />
+
+
+
+                <NextTurnView/>
             </div>
         )
     }

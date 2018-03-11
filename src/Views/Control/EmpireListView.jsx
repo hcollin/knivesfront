@@ -4,9 +4,15 @@ import {observer} from 'mobx-react';
 import GameStore from '../../Stores/GameStore';
 
 import "./empirelistview.scss";
+import ActionService from '../../Services/ActionService';
 
 @observer
 export default class EmpireListView extends React.Component {
+
+
+    switchEmpire(empire) {
+        ActionService.changeActiveEmpire(empire)
+    }
 
     render() {
         return (
@@ -21,7 +27,7 @@ export default class EmpireListView extends React.Component {
 
                         return (
                             <div key={empire.id} className="empire" style={empire.colorScheme}>
-                                <div className="name">
+                                <div className="name" onClick={() => this.switchEmpire(empire)}>
                                     {empire.name}
                                 </div>
                                 <div className="relations">

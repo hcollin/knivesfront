@@ -1,5 +1,4 @@
-
-@import "controlareas.scss";
+@import "../controlareas";
 
 .empirelistview {
 
@@ -18,6 +17,12 @@
         font-size: 20px;
         font-weight: 500;
         padding: 10px;
+
+        &.done:before {
+          font-family: "FontAwesome";
+          content: '\f00c';
+          margin-right: 3px;
+        }
       }
 
       .relations, .communication {

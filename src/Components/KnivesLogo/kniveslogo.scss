@@ -1,0 +1,75 @@
+.kniveslogo {
+
+  $logoBaseFontSize: 96px;
+  $logoBaseAdjustment: 15px;
+
+  font-size: $logoBaseFontSize;
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+  color: #AA0088;
+  letter-spacing: 2px;
+  font-weight: 600;
+
+  text-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+
+  span {
+    display: inline-block;
+  }
+
+  span.k {
+    transform: skew(-10deg) rotate(-12deg);
+    font-size: 1.3em;
+    top: $logoBaseAdjustment;
+    left: $logoBaseAdjustment * 0.6;
+    position: relative;
+    font-weight: 700;
+    color: #0088AA;
+  }
+
+  span.i {
+    transform: skew(5deg) rotate(14deg);
+    text-transform: lowercase;
+    font-family: "Times New Roman";
+    font-weight: 700;
+    color: #0088AA;
+  }
+
+  span.e {
+    transform: skew(-20deg) rotate(-20deg);
+    text-transform: lowercase;
+    top: $logoBaseAdjustment * -1;
+    position: relative;
+    font-weight: 700;
+    color: #0088AA;
+  }
+
+  &.small {
+
+    font-size: $logoBaseFontSize * 0.5;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-weight: 500;
+
+    span {
+
+
+      &.k {
+        top: $logoBaseAdjustment * 0.5;
+        left: $logoBaseAdjustment * 0.6 *0.5;
+        font-weight: 600;
+
+      }
+
+      &.i {
+        font-weight: 600;
+      }
+
+      &.e {
+        top: $logoBaseAdjustment * -0.5;
+        font-weight: 600;
+      }
+    }
+
+
+  }
+}

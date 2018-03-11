@@ -2,15 +2,18 @@ import React from 'react';
 import {observer} from 'mobx-react';
 
 
-import CityService from '../../Services/CityService';
-import GameStore from '../../Stores/GameStore';
+import CommandService from '../../../Services/CommandService';
+import CityService from '../../../Services/CityService';
+import GameStore from '../../../Stores/GameStore';
 
 import './cityinfoview.scss';
 
 @observer
 export default class CityInfoView extends React.Component {
 
-
+    commandInfra() {
+        CommandService.growInfra(GameStore.selectedHex.city);
+    }
 
 
 
@@ -48,7 +51,7 @@ export default class CityInfoView extends React.Component {
                     <div className="buttons">
                         <button className="build current">Build</button>
                         <button className="heal">Heal</button>
-                        <button className="infra">Grow</button>
+                        <button className="infra" onClick={() => this.commandInfra()}>Grow</button>
                     </div>
                     <div className="current">
                         Current Command

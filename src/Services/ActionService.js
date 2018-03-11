@@ -1,13 +1,41 @@
+
+import UiStore from '../Stores/UiStore';
 import GameStore from '../Stores/GameStore';
 import DummyServer from '../Services/DummyServer';
 
 class ActionService {
 
     constructor() {
-        this.ponger = setInterval(() => {
-            this.updateFromServer();
-        }, 1000);
+        this.ponger = null;
     }
+
+
+    newGame() {
+        DummyServer.createGame().then(gameData => {
+            GameStore.createGameFromData(gameData);
+            UiStore.setView("GAMEVIEW");
+            this.startGame();
+        })
+    }
+
+    joinGame() {
+
+    }
+
+    startGame() {
+        let state = {
+            empires: GameStore.empires,
+            map: GameStore.map,
+            status: GameStore.status
+        };
+        DummyServer.startGame(state).then(res => {
+            this.ponger = setInterval(() => {
+                this.updateFromServer();
+            }, 1000);
+        });
+
+    }
+
 
     changeActiveEmpire(empire) {
         GameStore.setActiveEmpire(empire);
@@ -18,7 +46,7 @@ class ActionService {
             GameStore.activeEmpire.setDoneForTurn();
             console.log("Turn Done");
         }).catch(err => {
-            console.error("TUrn confirmation failed");
+            console.error("Turn confirmation failed");
         });
     }
 
@@ -39,11 +67,9 @@ class ActionService {
                 });
             }
 
-
-            console.log("RES", res);
         }).catch(err => {
             console.error("FAILED TO GET DATA", err);
-        })
+        });
     }
 
 }

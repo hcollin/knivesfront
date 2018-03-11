@@ -16,6 +16,7 @@ class GameStore {
 
     @observable activeEmpire = null;
 
+    @observable status = "NEW";
 
     @action
     createGameFromData(data) {
@@ -44,6 +45,11 @@ class GameStore {
         this.activeEmpire = this.empires[0];
 
 
+    }
+
+    @action
+    setStatus(newStatus) {
+        this.status = newStatus;
     }
 
     @action

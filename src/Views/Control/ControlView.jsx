@@ -2,14 +2,16 @@ import React from 'react';
 
 import './controlview.scss';
 
-import MyEmpireView from './MyEmpireView';
-import CityInfoView from './CityInfoView';
-import HexInfoView from './HexInfoView';
-import EmpireListView from './EmpireListView';
+import KnivesLogo from '../../Components/KnivesLogo/KnivesLogo';
+
+import MyEmpireView from './MyEmpire/MyEmpireView';
+import CityInfoView from './CityInfo/CityInfoView';
+import HexInfoView from './AreaInfo/HexInfoView';
+import EmpireListView from './EmpireList/EmpireListView';
 
 import CityService from '../../Services/CityService';
 import MapStore from '../../Stores/MapStore';
-import NextTurnView from "./NextTurnView";
+import NextTurnView from "./TurnInfo/NextTurnView";
 
 export default class ControlView extends React.Component {
 
@@ -22,14 +24,14 @@ export default class ControlView extends React.Component {
         return (
             <div className="controlview">
                 <div className="knives">
-                    <span className="name">Knives</span>
+                    <KnivesLogo className="small"/>
                 </div>
                 <MyEmpireView />
                 <HexInfoView />
                 <CityInfoView />
                 <EmpireListView />
 
-
+                <div className="filler" />
 
                 <NextTurnView/>
             </div>

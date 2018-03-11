@@ -1,8 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
-import GameStore from '../../Stores/GameStore';
-import ActionServer from '../../Services/ActionService';
+import GameStore from '../../../Stores/GameStore';
+import ActionServer from '../../../Services/ActionService';
 
 import './nextturnview.scss';
 
@@ -20,6 +20,9 @@ export default class NextTurnView extends React.Component {
                 <div className="button">
                     {!GameStore.activeEmpire.doneForTurn &&
                     <button onClick={() => ActionServer.nextTurn()}>Next turn</button>
+                    }
+                    {GameStore.activeEmpire.doneForTurn &&
+                        <h2>Done!</h2>
                     }
 
                 </div>

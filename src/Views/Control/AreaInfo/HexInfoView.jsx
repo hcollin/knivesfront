@@ -2,8 +2,8 @@ import React from 'react';
 import {observer} from 'mobx-react';
 
 
-import CityService from '../../Services/CityService';
-import GameStore from '../../Stores/GameStore';
+import CityService from '../../../Services/CityService';
+import GameStore from '../../../Stores/GameStore';
 
 import './hexinfoview.scss';
 

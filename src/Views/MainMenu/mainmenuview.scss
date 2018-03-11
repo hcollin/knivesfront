@@ -1,0 +1,52 @@
+
+.mainmenuview {
+
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  height: 100%;
+
+  div.menu {
+    flex:  2 2 auto;
+
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    //background: linear-gradient(#FFF 95%, #AA0088 100%);
+    background: linear-gradient(black 0%, #880066 40%, #cc3399 50%, #880066 70%, black 100%);
+
+
+    ul {
+      list-style: none;
+      position: relative;
+      li {
+        font-size: 48px;
+        margin: 20px 0;
+        user-select: none;
+        color: white;
+        text-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+        position: relative;
+
+        &:hover {
+          cursor: pointer;
+          color: #cc22aa;
+          text-shadow: 1px 1px 15px rgba(0,0,0,0.8);
+          top: 4px;
+          left: 4px;
+        }
+      }
+    }
+  }
+
+  div.submenu {
+    flex:  3 3 auto;
+    width: 60%;
+    background-color: green;
+  }
+
+}

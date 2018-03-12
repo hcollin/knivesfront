@@ -16,7 +16,6 @@ class ClientStore {
 
     @action
     setActiveEmpire(empire) {
-        console.log("Set Empire", empire);
         this.activeEmpire = empire;
     }
 

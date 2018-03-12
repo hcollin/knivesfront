@@ -48,8 +48,8 @@ class ActionService {
     }
 
 
-    changeActiveEmpire(empire) {
-        GameStore.setActiveEmpire(empire);
+    changeActiveEmpire(empireId) {
+        ClientStore.setActiveEmpire(EmpireService.getById(empireId));
     }
 
     nextTurn() {

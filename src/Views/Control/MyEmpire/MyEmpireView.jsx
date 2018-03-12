@@ -15,8 +15,6 @@ export default class MyEmpireView extends React.Component {
 
     render() {
 
-        console.log("ACTIVE EMPIRE", ClientStore.activeEmpire);
-
         if(!ClientStore.activeEmpire) {
             return (
                 <div className="myempireview">

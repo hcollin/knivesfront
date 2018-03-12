@@ -5,6 +5,10 @@ import DummyDataServer from "./DummyDataServer";
 
 class EmpireService {
 
+    list() {
+        return GameDataStore.state.empires;
+    }
+
     getById(id) {
         return GameDataStore.state.empires.find(empire => {
             return empire.id === id;

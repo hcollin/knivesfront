@@ -22,8 +22,8 @@ export default class TechInfoView extends React.Component {
                 <div className="title">Research Department</div>
                 {available.length > 0 &&
                 <div className="research">
-                    {available.map(tech => (
-                        <div>
+                    {available.map((tech, i) => (
+                        <div key={i}>
                             {tech.name}
                         </div>
                     ))}
@@ -38,8 +38,8 @@ export default class TechInfoView extends React.Component {
 
                 {library.length > 0 &&
                 <div className="library">
-                    {library.map(tech => (
-                        <div>
+                    {library.map((tech, i) => (
+                        <div  key={i}>
                             {tech.name}
                         </div>
                     ))}

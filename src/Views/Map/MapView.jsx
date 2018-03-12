@@ -2,7 +2,7 @@ import React from 'react';
 import {observer} from 'mobx-react';
 import {observable, action} from 'mobx';
 
-import GameStore from '../../Stores/GameStore';
+import ClientStore from '../../Stores/ClientStore';
 import MapStore from '../../Stores/MapStore';
 import HexTile from '../../Components/HexTile/HexTile';
 
@@ -21,13 +21,13 @@ export default class MapView extends React.Component {
             this.activeHex.deactivate();
             if(oldId === hex.id) {
                 this.activeHex = null;
-                GameStore.setSelectedHex(null);
+                ClientStore.setSelectedArea(null);
                 return;
             }
         }
         hex.activate();
         this.activeHex = hex;
-        GameStore.setSelectedHex(hex);
+        ClientStore.setSelectedArea(hex);
     }
 
 

@@ -5,6 +5,8 @@ import GameStore from '../../../Stores/GameStore';
 
 
 import './myempireview.scss';
+import ClientStore from "../../../Stores/ClientStore";
+import EmpireService from '../../../Services/EmpireService';
 
 @observer
 export default class MyEmpireView extends React.Component {
@@ -13,7 +15,9 @@ export default class MyEmpireView extends React.Component {
 
     render() {
 
-        if(!GameStore.activeEmpire) {
+        console.log("ACTIVE EMPIRE", ClientStore.activeEmpire);
+
+        if(!ClientStore.activeEmpire) {
             return (
                 <div className="myempireview">
                     <h2 className="message">No active empire</h2>
@@ -21,14 +25,14 @@ export default class MyEmpireView extends React.Component {
             )
         }
 
-        return(
-            <div className="myempireview" style={GameStore.activeEmpire.colorScheme}>
+        return (
+            <div className="myempireview" style={EmpireService.getColorScheme()}>
                 <div className="name">
-                    <h1>{GameStore.activeEmpire.name}</h1>
+                    <h1>{ClientStore.activeEmpire.name}</h1>
                 </div>
                 <div className="gold">
                     <div className="value">
-                        {GameStore.activeEmpire.gold}
+                        {ClientStore.activeEmpire.gold}
                     </div>
                     <div className="label">Gold</div>
                 </div>

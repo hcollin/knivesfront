@@ -6,6 +6,10 @@ import CommandService from '../../../Services/CommandService';
 import CityService from '../../../Services/CityService';
 import GameStore from '../../../Stores/GameStore';
 
+import ClientStore from '../../../Stores/ClientStore';
+
+import EmpireService from '../../../Services/EmpireService';
+
 import CmdInfra from './CmdInfra';
 
 import './cityinfoview.scss';
@@ -19,7 +23,7 @@ export default class CityInfoView extends React.Component {
 
     render() {
 
-        if(!GameStore.selectedHex || !GameStore.selectedHex.city) {
+        if(!ClientStore.selectedArea || !ClientStore.selectedArea.city) {
             return (
               <div className="cityinfoview">
                   <div className="title">Infrastructure</div>
@@ -30,15 +34,18 @@ export default class CityInfoView extends React.Component {
             );
         }
 
-        const city = GameStore.selectedHex.city;
-        const showActions = city.owner && city.owner.id === GameStore.activeEmpire.id;
-        const submitted = GameStore.activeEmpire.doneForTurn;
+        const city = ClientStore.selectedArea.city;
+        const showActions = city.owner && city.owner === ClientStore.activeEmpireId;
+        const submitted = EmpireService.isDoneForTurn();
+        const empire = city.owner ? EmpireService.getById(city.owner) : false;
+
+        const command = CityService.command(city.id);
 
         let commandInfo = null;
         if(city.command) {
             switch(city.command.type) {
                 case "INFRA":
-                    commandInfo = <CmdInfra/>
+                    commandInfo = <CmdInfra/>;
                     break;
             }
         }
@@ -49,7 +56,7 @@ export default class CityInfoView extends React.Component {
                 <div className="cityinfo">
                     <div>
                         <h1>{city.name}</h1>
-                        <h3 className="owner">{city.owner ? city.owner.name : "Neutral"}</h3>
+                        <h3 className="owner">{empire ? empire.name : "Neutral"}</h3>
                     </div>
                     <div className="size">
                         <h2>{city.size}</h2>
@@ -59,9 +66,9 @@ export default class CityInfoView extends React.Component {
                 {showActions &&
                 <div className="commands">
                     <div className="buttons">
-                        <button className={"build" + (city.command && city.command.type==="BUILD" ? " current": "")} disabled={GameStore.activeEmpire.doneForTurn}>Build</button>
-                        <button className={"heal" + (city.command && city.command.type==="HEAL" ? " current": "")} disabled={GameStore.activeEmpire.doneForTurn}>Heal</button>
-                        <button className={"infra" + (city.command && city.command.type==="INFRA" ? " current": "")} onClick={() => this.commandInfra()} disabled={GameStore.activeEmpire.doneForTurn}>Grow</button>
+                        <button className={"build" + (command && command.type==="BUILD" ? " current": "")} disabled={EmpireService.isDoneForTurn()}>Build</button>
+                        <button className={"heal" + (command && command.type==="HEAL" ? " current": "")} disabled={EmpireService.isDoneForTurn()}>Heal</button>
+                        <button className={"infra" + (command && command.type==="INFRA" ? " current": "")} onClick={() => this.commandInfra()} disabled={EmpireService.isDoneForTurn()}>Grow</button>
                     </div>
                     <div className="current">
                         {commandInfo}

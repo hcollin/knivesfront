@@ -3,6 +3,17 @@ import UiStore from '../Stores/UiStore';
 import GameStore from '../Stores/GameStore';
 import DummyServer from '../Services/DummyServer';
 
+// NEW BELOW
+
+import DummyDataServer from './DummyDataServer';
+
+import GameDataStore from '../Stores/GameDataStore';
+import ClientStore from '../Stores/ClientStore';
+import MapStore from '../Stores/MapStore';
+
+import GameService from '../Services/GameService';
+import EmpireService from '../Services/EmpireService';
+
 class ActionService {
 
     constructor() {
@@ -11,11 +22,13 @@ class ActionService {
 
 
     newGame() {
-        DummyServer.createGame().then(gameData => {
-            GameStore.createGameFromData(gameData);
-            UiStore.setView("GAMEVIEW");
+        DummyDataServer.createGame().then(gameData => {
+            GameDataStore.setState(gameData);
+            GameService.newGame();
+            // MapStore.createMapFromData(gameData.map);
             this.startGame();
-        })
+        });
+
     }
 
     joinGame() {
@@ -23,15 +36,13 @@ class ActionService {
     }
 
     startGame() {
-        let state = {
-            empires: GameStore.empires,
-            map: GameStore.map,
-            status: GameStore.status
-        };
-        DummyServer.startGame(state).then(res => {
-            this.ponger = setInterval(() => {
-                this.updateFromServer();
-            }, 1000);
+
+        DummyDataServer.startGame(this.updateFromServer).then(res => {
+            GameService.startGame();
+            UiStore.setView("GAMEVIEW");
+            console.log("Game started");
+        }).catch(err => {
+            console.error(err);
         });
 
     }
@@ -44,6 +55,7 @@ class ActionService {
     nextTurn() {
         DummyServer.confirmTurn(GameStore.activeEmpire).then(res => {
             GameStore.activeEmpire.setDoneForTurn();
+            ClientStore.setIAmDone(true);
             console.log("Turn Done");
         }).catch(err => {
             console.error("Turn confirmation failed");
@@ -51,25 +63,28 @@ class ActionService {
     }
 
     updateFromServer() {
-        DummyServer.getGameData().then(res => {
 
-            if (res.turn !== GameStore.turn) {
-                console.log("NEW TURN HAS ARRIVED!");
-                GameStore.setTurn(res.turn);
-                GameStore.empires.forEach(empire => {
-                    empire.prepareNewTurn();
-                });
-            } else {
-                GameStore.empires.forEach(empire => {
-                    if (res.empiresDone.includes(empire.name)) {
-                        empire.setDoneForTurn();
-                    }
-                });
-            }
+        console.log("callback from server");
 
-        }).catch(err => {
-            console.error("FAILED TO GET DATA", err);
-        });
+        // DummyServer.getGameData().then(res => {
+        //
+        //     if (res.turn !== GameStore.turn) {
+        //         console.log("NEW TURN HAS ARRIVED!");
+        //         GameStore.setTurn(res.turn);
+        //         GameStore.empires.forEach(empire => {
+        //             empire.prepareNewTurn();
+        //         });
+        //     } else {
+        //         GameStore.empires.forEach(empire => {
+        //             if (res.empiresDone.includes(empire.name)) {
+        //                 empire.setDoneForTurn();
+        //             }
+        //         });
+        //     }
+        //
+        // }).catch(err => {
+        //     console.error("FAILED TO GET DATA", err);
+        // });
     }
 
 }

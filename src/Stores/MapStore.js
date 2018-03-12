@@ -50,7 +50,8 @@ class MapStore {
 
     @action
     createMapFromData(mapObject) {
-        const rows = mapObject.split("|");
+        const rows = mapObject;
+        // const rows = mapObject.split("|");
 
         this.height = rows.length;
         this.width = rows[0].length;

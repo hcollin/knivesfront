@@ -4,6 +4,10 @@ import { defaultTechTree } from '../Data/Tech/default';
 import GameStore from '../Stores/GameStore';
 import EmpireStore from '../Stores/EmpireStore';
 
+import EmpireService from '../Services/EmpireService';
+import GameDataStore from '../Stores/GameDataStore';
+import ClientStore from '../Stores/ClientStore';
+
 class TechService {
 
     constructor(techTree) {
@@ -11,7 +15,8 @@ class TechService {
     }
 
     startResearch(techId) {
-        GameStore.activeEmpire.setResearch(this.techTree[techId]);
+        // Send research command
+        //ClientStore.activeEmpire.setResearch(this.techTree[techId]);
     }
 
     getAvailableTech() {
@@ -31,7 +36,7 @@ class TechService {
     }
 
     getMyTech() {
-        return GameStore.activeEmpire.techs.reduce((arr, cur) => {
+        return ClientStore.activeEmpire.techs.reduce((arr, cur) => {
             const tech = this.techTree[cur];
             arr.push(tech);
             return arr;

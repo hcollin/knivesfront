@@ -37,6 +37,14 @@ class GameService {
         });
     }
 
+    updateState(newStateData) {
+        GameDataStore.setState(newStateData);
+    }
+
+    newTurnState(newStateData) {
+        GameDataStore.setState(newStateData);
+    }
+
     startGame() {
         ClientStore.setActiveEmpire(EmpireService.getFirst());
     }

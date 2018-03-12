@@ -53,38 +53,26 @@ class ActionService {
     }
 
     nextTurn() {
-        DummyServer.confirmTurn(GameStore.activeEmpire).then(res => {
-            GameStore.activeEmpire.setDoneForTurn();
-            ClientStore.setIAmDone(true);
+        DummyDataServer.empireIsReady(ClientStore.activeEmpireId).then(res => {
+            // GameStore.activeEmpire.setDoneForTurn();
+            // ClientStore.setIAmDone(true);
             console.log("Turn Done");
         }).catch(err => {
             console.error("Turn confirmation failed");
         });
     }
 
-    updateFromServer() {
+    updateFromServer(eventObject) {
 
-        console.log("callback from server");
+        console.log("callback from server", eventObject);
 
-        // DummyServer.getGameData().then(res => {
-        //
-        //     if (res.turn !== GameStore.turn) {
-        //         console.log("NEW TURN HAS ARRIVED!");
-        //         GameStore.setTurn(res.turn);
-        //         GameStore.empires.forEach(empire => {
-        //             empire.prepareNewTurn();
-        //         });
-        //     } else {
-        //         GameStore.empires.forEach(empire => {
-        //             if (res.empiresDone.includes(empire.name)) {
-        //                 empire.setDoneForTurn();
-        //             }
-        //         });
-        //     }
-        //
-        // }).catch(err => {
-        //     console.error("FAILED TO GET DATA", err);
-        // });
+        switch(eventObject.action) {
+            case "UPDATE":
+                GameService.updateState(eventObject.data);
+                break;
+            case "NEWTURN":
+                GameService.updateState(eventObject.data);
+        }
     }
 
 }

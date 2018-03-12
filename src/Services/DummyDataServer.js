@@ -5,7 +5,7 @@ import { defaultMap } from '../Data/Maps/default';
 const testState = {
     game: {
         id: null,
-        turn: 0
+        turn: 1
     },
     map: [
         "WWWWWWLLLLLLWWW",
@@ -330,6 +330,10 @@ class DummyDataServer {
         });
     }
 
+    openGame(listener) {
+
+    }
+
     getFullState() {
         return new Promise((resolve, reject) => {
             resolve(this.currentState.cloneMe());
@@ -342,10 +346,20 @@ class DummyDataServer {
             if (!this.playersDone.includes(empireId)) {
                 this.playersDone.push(empireId);
                 this.currentState.empires.forEach(empire => {
-                    empire.doneForTurn = this.playersDone.includes(empireId);
+                    empire.doneForTurn = this.playersDone.includes(empire.id);
                 });
-                this._triggerStatePush();
+
+                if(this.playersDone.length === this.currentState.empires.length) {
+                    this._processTurn();
+                } else {
+                    this._triggerStatePush({
+                        action: "UPDATE",
+                        data: this.currentState.cloneMe()
+                    });
+                }
                 resolve();
+
+
             } else {
                 reject();
             }
@@ -354,7 +368,9 @@ class DummyDataServer {
 
     isEmpireReady(empireId) {
         return Promise((resolve, reject) => {
+
             if(this.playerDone.includes(empireId)) {
+
                 resolve(true);
             } else {
                 resolve(false);
@@ -398,26 +414,34 @@ class DummyDataServer {
         this.stateHistory.push(this.currentState.cloneMe());
         const newState = GameState.cloneState(this.currentState);
 
-        // RUN COMMANDS HERE!!
+        //TODO: RUN COMMANDS HERE!!
 
 
+        // Turn count up by 1
         newState.game.turn = this.stateHistory.length + 1;
+
+        // Reset doneForTurn for empires
+        newState.empires.forEach(emp => {
+            emp.doneForTurn = false;
+        });
+
+        // Reset commands
         newState.commands = [];
 
         this.playersDone = [];
         this.commands = [];
 
         this.currentState = newState;
-        this._triggerStatePush();
+        this._triggerStatePush({action: "NEWTURN", data: this.currentState.cloneMe()});
     }
 
 
-    _triggerStatePush() {
+    _triggerStatePush(eventObject) {
         console.log("Push new State to clients");
 
         this.listeners.map( listCb => {
             if(typeof listCb === "function") {
-                listCb(this.currentState);
+                listCb(eventObject);
             }
         });
 

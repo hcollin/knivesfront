@@ -7,6 +7,7 @@ import CommandService from '../../../Services/CommandService';
 
 import EmpireService from '../../../Services/EmpireService';
 import ClientStore from '../../../Stores/ClientStore';
+import GameDataStore from '../../../Stores/GameDataStore';
 
 import './nextturnview.scss';
 
@@ -28,7 +29,7 @@ export default class NextTurnView extends React.Component {
                 <div className="button">
 
                     <button className="save" onClick={() => CommandService.saveCommands()} disabled={activeEmpireDone}>Save</button>
-                    <h1>{GameStore.turn +1}</h1>
+                    <h1>{GameDataStore.state.game.turn}</h1>
                     <button className="next" onClick={() => ActionService.nextTurn()} disabled={activeEmpireDone}>Ready</button>
 
 

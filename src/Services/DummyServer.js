@@ -151,7 +151,6 @@ class DummyServer {
             {type: "INFRA", processor: this._cmdCityInfra.bind(this)}
         ];
 
-
         cmdOrder.forEach(cmd => {
             const cmds = this.currentCommands.filter(cmd => cmd.type ===cmd.type);
             cmds.map(command=> {

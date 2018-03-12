@@ -5,14 +5,14 @@ import './App.scss';
 import { defaultMap } from './Data/Maps/default';
 
 import UiStore from './Stores/UiStore';
-
-import GameStore from './Stores/GameStore';
+import ActionService from './Services/ActionService';
 
 import GameView from './Views/Game/GameView';
 import MainMenuView from './Views/MainMenu/MainMenuView';
-// MapStore.createNewRandomMap(15, 15);
-// GameStore.createGameFromData(defaultMap);
-//MapStore.createMapFromData();
+
+// Comment this line to go to the main menu
+ActionService.newGame();
+
 
 @observer
 class App extends Component {

@@ -23,6 +23,8 @@ export default class CityStore {
     @observable size = 1;
     @observable owner = null;
 
+    @observable command = null;
+
     constructor(options) {
         this.id = uuid.v4();
         this.name = options.name ? options.name : RANDOMCITYNAMES[Math.floor(Math.random()*RANDOMCITYNAMES.length)];
@@ -33,8 +35,18 @@ export default class CityStore {
     }
 
     @action
+    nextTurn() {
+        this.command = null;
+    }
+
+    @action
     setOwner(empire) {
         this.owner = empire;
+    }
+
+    @action
+    setCommand(cmd) {
+        this.command = cmd;
     }
 }
 

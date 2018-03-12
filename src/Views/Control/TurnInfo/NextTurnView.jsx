@@ -2,7 +2,8 @@ import React from 'react';
 import { observer } from 'mobx-react';
 
 import GameStore from '../../../Stores/GameStore';
-import ActionServer from '../../../Services/ActionService';
+import ActionService from '../../../Services/ActionService';
+import CommandService from '../../../Services/CommandService';
 
 import './nextturnview.scss';
 
@@ -14,16 +15,17 @@ export default class NextTurnView extends React.Component {
 
         return (
             <div className="nextturnview">
-                <div className="turninfo">
-                    Turn: {(GameStore.turn +1)}
-                </div>
+                {/*<div className="turninfo">*/}
+                    {/*Turn: {(GameStore.turn +1)}*/}
+                {/*</div>*/}
+
+
                 <div className="button">
-                    {!GameStore.activeEmpire.doneForTurn &&
-                    <button onClick={() => ActionServer.nextTurn()}>Next turn</button>
-                    }
-                    {GameStore.activeEmpire.doneForTurn &&
-                        <h2>Done!</h2>
-                    }
+
+                    <button className="save" onClick={() => CommandService.saveCommands()} disabled={GameStore.activeEmpire.doneForTurn}>Save</button>
+                    <h1>{GameStore.turn +1}</h1>
+                    <button className="next" onClick={() => ActionService.nextTurn()} disabled={GameStore.activeEmpire.doneForTurn}>Ready</button>
+
 
                 </div>
 

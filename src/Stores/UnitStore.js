@@ -15,6 +15,7 @@ export default class UnitStore {
     @observable y = null;
     @observable flags = [];
 
+    @observable command = null;
 
     constructor(options) {
         this.id = uuid.v4();
@@ -32,6 +33,21 @@ export default class UnitStore {
         this.owner= options.owner ? options.owner : null;
         this.x = options.x ? options.x : null;
         this.y = options.y ? options.y : null;
+    }
+
+    @action
+    nextTurn() {
+        this.command = null;
+    }
+
+    @action
+    setOwner(empire) {
+        this.owner = empire;
+    }
+
+    @action
+    setCommand(cmd) {
+        this.command = cmd;
     }
 
 

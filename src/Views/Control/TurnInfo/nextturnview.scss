@@ -2,38 +2,84 @@
 
 .nextturnview {
   flex: 0 0 auto;
-  height: 56px;
+  height: 96px;
   padding: 0 10px;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  border-top: solid 3px rgba(64,0,0,0.3);
-  border-bottom: solid 3px rgba(64,0,0,0.3);
-  background: linear-gradient(to right,#888 0%, #BBB 5%, #FFF 70%, #888 95%, #000 100%);
-  box-shadow: -5px 0 10px 5px rgba(0,0,0,0.3);
-
-  div.turninfo {
-    flex: 1;
-    font-size: 1.5em;
-    font-weight: 500;
-  }
 
   div.button {
     flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     button {
-
-      @include iconAndTextButton('\f00c');
-      width: 120px;
+      flex: 1;
+      @include iconAndTextButton('\f0c7');
+      width: 96px;
       height: 40px;
       font-size: 20px;
+      margin: 0;
 
-      &:before {
-        font-size: 24px;
-        color: green;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      //box-shadow: none;
+      box-shadow: 0 0 5px 3px rgba(0,0,0,0.4);
+
+      &.save {
+
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-left: none;
+
+        &:before {
+          color: red;
+          content: '\f0c7';
+        }
       }
+
+      &.next {
+
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-right: none;
+
+        &:before {
+          color: green;
+          content: '\f00c';
+        }
+      }
+
+    }
+
+    h1 {
+      flex: 0 0 auto;
+      height: 70px;
+      width: 50px;
+      background: linear-gradient(#502 0%, #A08 50%, #502 100%);
+      font-size: 1.8em;
+      font-weight: 600;
+      border: solid 2px rgba(0,0,0,0.5);
+      box-shadow: 0 0 5px 3px rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      z-index: 10;
+      color: #FDE;
+      user-select: none;
+
     }
 
     h2{

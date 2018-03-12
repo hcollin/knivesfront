@@ -10,12 +10,14 @@ export default class EmpireStore {
 
     @observable gold = 999;
 
+    @observable techs = [];
+
+    @observable currentlyReseaching = null;
+
     @observable commands = [];
     @observable commandHistory = [];
 
     @observable doneForTurn = false;
-
-
 
     constructor(options) {
         this.id = uuid.v4();
@@ -35,7 +37,13 @@ export default class EmpireStore {
     @action
     prepareNewTurn() {
         this.doneForTurn = false;
+        this.currentlyReseaching = null;
 
+    }
+
+    @action
+    setResearch(tech) {
+        this.currentlyReseaching = tech;
     }
 
     @computed get colorScheme() {

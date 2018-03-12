@@ -15,11 +15,18 @@ class CommandService {
         this.currentCommands.push(cmd);
     }
 
+
+    @action
+    saveCommands() {
+
+    }
+
     // CITY COMMANDS
 
     growInfra(targetCity) {
         if(targetCity.owner && targetCity.owner.id === GameStore.activeEmpire.id) {
             const cmd = new CommandStore("INFRA", targetCity,  targetCity.owner, {});
+            targetCity.setCommand(cmd);
             DummyServer.submitCommand(cmd).then(res => {
                 this._addCurrentCommand(cmd);
                 console.log("Command succesfully sent");

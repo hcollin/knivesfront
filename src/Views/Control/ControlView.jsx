@@ -8,10 +8,12 @@ import MyEmpireView from './MyEmpire/MyEmpireView';
 import CityInfoView from './CityInfo/CityInfoView';
 import HexInfoView from './AreaInfo/HexInfoView';
 import EmpireListView from './EmpireList/EmpireListView';
+import TechInfoView from './TechInfo/TechInfoView';
+import NextTurnView from "./TurnInfo/NextTurnView";
 
 import CityService from '../../Services/CityService';
 import MapStore from '../../Stores/MapStore';
-import NextTurnView from "./TurnInfo/NextTurnView";
+
 
 export default class ControlView extends React.Component {
 
@@ -19,7 +21,7 @@ export default class ControlView extends React.Component {
     render() {
 
 
-        const currentCity = MapStore
+
 
         return (
             <div className="controlview">
@@ -27,9 +29,11 @@ export default class ControlView extends React.Component {
                     <KnivesLogo className="small"/>
                 </div>
                 <MyEmpireView />
-                <HexInfoView />
+                {/*<HexInfoView />*/}
                 <CityInfoView />
+                <TechInfoView />
                 <EmpireListView />
+
 
                 <div className="filler" />
 

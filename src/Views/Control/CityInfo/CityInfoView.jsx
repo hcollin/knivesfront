@@ -6,6 +6,8 @@ import CommandService from '../../../Services/CommandService';
 import CityService from '../../../Services/CityService';
 import GameStore from '../../../Stores/GameStore';
 
+import CmdInfra from './CmdInfra';
+
 import './cityinfoview.scss';
 
 @observer
@@ -15,14 +17,12 @@ export default class CityInfoView extends React.Component {
         CommandService.growInfra(GameStore.selectedHex.city);
     }
 
-
-
     render() {
 
         if(!GameStore.selectedHex || !GameStore.selectedHex.city) {
             return (
               <div className="cityinfoview">
-                  <div className="title">City Information</div>
+                  <div className="title">Infrastructure</div>
                   <div className="message">
                       <p>No area with city selected.</p>
                   </div>
@@ -32,10 +32,20 @@ export default class CityInfoView extends React.Component {
 
         const city = GameStore.selectedHex.city;
         const showActions = city.owner && city.owner.id === GameStore.activeEmpire.id;
+        const submitted = GameStore.activeEmpire.doneForTurn;
+
+        let commandInfo = null;
+        if(city.command) {
+            switch(city.command.type) {
+                case "INFRA":
+                    commandInfo = <CmdInfra/>
+                    break;
+            }
+        }
 
         return (
             <div className="cityinfoview">
-                <div className="title">City Information</div>
+                <div className="title">Infrastructure</div>
                 <div className="cityinfo">
                     <div>
                         <h1>{city.name}</h1>
@@ -49,20 +59,16 @@ export default class CityInfoView extends React.Component {
                 {showActions &&
                 <div className="commands">
                     <div className="buttons">
-                        <button className="build current">Build</button>
-                        <button className="heal">Heal</button>
-                        <button className="infra" onClick={() => this.commandInfra()}>Grow</button>
+                        <button className={"build" + (city.command && city.command.type==="BUILD" ? " current": "")} disabled={GameStore.activeEmpire.doneForTurn}>Build</button>
+                        <button className={"heal" + (city.command && city.command.type==="HEAL" ? " current": "")} disabled={GameStore.activeEmpire.doneForTurn}>Heal</button>
+                        <button className={"infra" + (city.command && city.command.type==="INFRA" ? " current": "")} onClick={() => this.commandInfra()} disabled={GameStore.activeEmpire.doneForTurn}>Grow</button>
                     </div>
                     <div className="current">
-                        Current Command
+                        {commandInfo}
                     </div>
 
                 </div>
                 }
-
-
-
-
 
             </div>
         )

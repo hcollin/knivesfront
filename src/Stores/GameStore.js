@@ -6,6 +6,18 @@ import EmpireStore from "./EmpireStore";
 import HexStore from "./HexStore";
 import CityService from '../Services/CityService';
 
+
+/*
+ REDO DATA FLOW IN THE FOLLOWING FASHION
+
+  - Game State after previous turn. This is immutable and is not changed.
+  - Commands, which will modify the preivous state after all players submit.t
+  - Ui state which handles the states of ui.
+
+
+
+ */
+
 class GameStore {
 
     @observable turn = 0;

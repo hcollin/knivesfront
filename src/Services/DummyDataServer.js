@@ -411,10 +411,10 @@ class DummyDataServer {
     _processTurn() {
         this.currentState.commands = this.commands.concat([]);
         this.stateHistory.push(this.currentState.cloneMe());
-        const newState = GameState.cloneState(this.currentState);
+        let newState = GameState.cloneState(this.currentState);
 
         //TODO: RUN COMMANDS HERE!!
-
+        newState = this._processCommands(newState);
 
 
         // Add gold to empires
@@ -441,10 +441,36 @@ class DummyDataServer {
         this.playersDone = [];
         this.commands = [];
 
-        this.currentState = newState;
+        this.currentState = newState.cloneMe();
         this._triggerStatePush({action: "NEWTURN", data: this.currentState.cloneMe()});
     }
 
+    // Turn processing
+    _processCommands(newState) {
+
+        // this.newState = Object.assign({}, this.gameState);
+        const cmdOrder = [
+            {type: "INFRA", processor: this._cmdCityInfra.bind(this)}
+        ];
+
+        cmdOrder.forEach(cmd => {
+            const cmds = this.commands.filter(cmd => cmd.type ===cmd.type);
+            cmds.map(command=> {
+                console.log(command);
+                cmd.processor(command, newState);
+            });
+        });
+
+        return newState;
+    }
+
+    _cmdCityInfra(command, newState) {
+        console.log("SERVER:CMD:INFRA", command.to);
+        console.log("NEW STATE", newState);
+
+        const cityIndex= newState.cities.findIndex(city => city.id === command.to);
+        newState.cities[cityIndex].size++;
+    }
 
     _triggerStatePush(eventObject) {
         console.log("Push new State to clients");

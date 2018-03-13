@@ -4,7 +4,6 @@ import ClientStore from "../Stores/ClientStore";
 
 export default class CityService {
 
-
     static getById(id) {
         return GameDataStore.state.cities.find(cs => {
             return cs.id === id;

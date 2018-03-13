@@ -54,8 +54,6 @@ class ActionService {
 
     nextTurn() {
         DummyDataServer.empireIsReady(ClientStore.activeEmpireId).then(res => {
-            // GameStore.activeEmpire.setDoneForTurn();
-            // ClientStore.setIAmDone(true);
             console.log("Turn Done");
         }).catch(err => {
             console.error("Turn confirmation failed");
@@ -64,14 +62,15 @@ class ActionService {
 
     updateFromServer(eventObject) {
 
-        console.log("callback from server", eventObject);
+        console.log("\n\tCALLBACK from server", eventObject);
 
         switch(eventObject.action) {
             case "UPDATE":
                 GameService.updateState(eventObject.data);
                 break;
             case "NEWTURN":
-                GameService.updateState(eventObject.data);
+                GameService.newTurnState(eventObject.data);
+                break;
         }
     }
 

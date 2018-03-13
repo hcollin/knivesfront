@@ -13,6 +13,7 @@ import EmpireService from '../../../Services/EmpireService';
 import CmdInfra from './CmdInfra';
 
 import './cityinfoview.scss';
+import GameDataStore from "../../../Stores/GameDataStore";
 
 @observer
 export default class CityInfoView extends React.Component {
@@ -34,7 +35,10 @@ export default class CityInfoView extends React.Component {
             );
         }
 
-        const city = ClientStore.selectedArea.city;
+
+
+        const city = CityService.getById(ClientStore.selectedArea.city.id);
+
         const showActions = city.owner && city.owner === ClientStore.activeEmpireId;
         const submitted = EmpireService.isDoneForTurn();
         const empire = city.owner ? EmpireService.getById(city.owner) : false;

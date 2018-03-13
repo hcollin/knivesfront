@@ -18,11 +18,9 @@ class GameService {
 
         // Create empires and set active empire
         GameDataStore.state.empires.forEach(empireData => {
-
             empireData.cities.map(cityId => {
                 const city = CityService.getById(cityId);
-            })
-
+            });
         });
     }
 
@@ -33,7 +31,11 @@ class GameService {
     }
 
     newTurnState(newStateData) {
+        console.log("NEW TURN STATE!", newStateData);
         GameDataStore.setState(newStateData);
+        ClientStore.setActiveEmpire(EmpireService.getById(ClientStore.activeEmpireId));
+        ClientStore.setSelectedArea(null);
+
     }
 
     startGame() {

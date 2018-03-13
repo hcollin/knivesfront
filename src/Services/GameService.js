@@ -21,24 +21,15 @@ class GameService {
 
             empireData.cities.map(cityId => {
                 const city = CityService.getById(cityId);
-
-
             })
 
-            // const empire = new EmpireStore(empireData);
-            // const capital = CityService.getByName(empireData.capital);
-            // capital.setOwner(empire);
-            // empireData.cities.forEach(cityName => {
-            //     const city = CityService.getByName(cityName);
-            //     city.setOwner(empire);
-            // });
-            //
-            // this.empires.push(empire);
         });
     }
 
     updateState(newStateData) {
         GameDataStore.setState(newStateData);
+        ClientStore.setActiveEmpire(EmpireService.getById(ClientStore.activeEmpireId));
+
     }
 
     newTurnState(newStateData) {

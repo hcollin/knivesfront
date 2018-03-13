@@ -18,7 +18,7 @@ import './cityinfoview.scss';
 export default class CityInfoView extends React.Component {
 
     commandInfra() {
-        CommandService.growInfra(GameStore.selectedHex.city);
+        CommandService.growInfra(ClientStore.selectedArea.city);
     }
 
     render() {
@@ -39,12 +39,12 @@ export default class CityInfoView extends React.Component {
         const submitted = EmpireService.isDoneForTurn();
         const empire = city.owner ? EmpireService.getById(city.owner) : false;
 
-        const command = CityService.command(city.id);
+        const command = CommandService.getCommand(city.id);
 
         let commandInfo = null;
-        if(city.command) {
-            switch(city.command.type) {
-                case "INFRA":
+        if(command) {
+            switch(command.type) {
+                case "CITY_INFRA":
                     commandInfo = <CmdInfra/>;
                     break;
             }

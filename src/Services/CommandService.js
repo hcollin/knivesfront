@@ -3,6 +3,12 @@ import { observable, action } from 'mobx';
 import CommandStore from '../Stores/CommandStore';
 import GameStore from '../Stores/GameStore';
 import DummyServer from "./DummyServer";
+import ClientStore from "../Stores/ClientStore";
+import GameDataStore from "../Stores/GameDataStore";
+import DummyDataServer from "./DummyDataServer";
+import CityService from "./CityService";
+
+
 
 
 class CommandService {
@@ -10,9 +16,11 @@ class CommandService {
 
     @observable currentCommands = [];
 
-    @action
-    _addCurrentCommand(cmd) {
-        this.currentCommands.push(cmd);
+
+    getCommand(to) {
+        return this.currentCommands.find(cmd => {
+            return cmd.to === to;
+        });
     }
 
 
@@ -24,16 +32,24 @@ class CommandService {
     // CITY COMMANDS
 
     growInfra(targetCity) {
-        if(targetCity.owner && targetCity.owner.id === GameStore.activeEmpire.id) {
-            const cmd = new CommandStore("INFRA", targetCity,  targetCity.owner, {});
-            targetCity.setCommand(cmd);
-            DummyServer.submitCommand(cmd).then(res => {
-                this._addCurrentCommand(cmd);
-                console.log("Command succesfully sent");
 
-            }).catch( err=>{
-                console.log("All fail", err);
-            });
+        if(ClientStore.iAmDone) {
+            return;
+        }
+
+        console.log("CITY", targetCity);
+        if(CityService.isMyCity(targetCity)) {
+            const cmd = this._createCommandObject("CITY_INFRA", targetCity.id);
+            DummyDataServer.addCommand(cmd).then(
+                action(res => {
+                    console.log("Command added", res);
+                    cmd.id = res;
+                    this._addCurrentCommand(cmd);
+                }),
+                action(err => {
+                    console.log("All fail", err);
+                })
+            );
         }
     }
 
@@ -43,6 +59,25 @@ class CommandService {
 
 
     // UNIT COMMANDS
+
+
+
+    // PRIVATE COMMANDS
+
+    _createCommandObject(type, to, params={}) {
+        return {
+            type: type,
+            to: to,
+            by: ClientStore.activeEmpireId,
+            params: params
+        }
+    }
+
+    @action
+    _addCurrentCommand(cmd) {
+        this.currentCommands.push(cmd);
+    }
+
 
 
 }

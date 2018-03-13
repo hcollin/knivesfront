@@ -1,5 +1,6 @@
 
 import GameDataStore from '../Stores/GameDataStore';
+import ClientStore from "../Stores/ClientStore";
 
 export default class CityService {
 
@@ -27,5 +28,10 @@ export default class CityService {
             return cmd.to === id;
         });
     }
+
+    static isMyCity(city) {
+        return city.owner && ClientStore.activeEmpireId === city.owner;
+    }
+
 
 }

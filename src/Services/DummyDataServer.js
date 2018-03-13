@@ -128,8 +128,8 @@ const testState = {
             name: "Finlande",
             color: "#4444FF",
             bgColor: "#FFFFFF",
-            capital: "hell",
-            cities: [ "hell", "turk",  "tamp" ],
+            capital: "hels",
+            cities: [ "hels", "turk",  "tamp" ],
             gold: 5,
             techs: [],
             allies: [],
@@ -380,11 +380,10 @@ class DummyDataServer {
 
     addCommand(cmd) {
         return new Promise((resolve, reject) => {
-            if(!this._removeCommandIfExists(cmd)) {
-                cmd.id = uuid.v4();
-            }
+            this._removeCommandIfExists(cmd);
+            cmd.id = uuid.v4();
             this.commands.push(cmd);
-            resolve();
+            resolve(cmd.id);
         });
     }
 
@@ -416,6 +415,17 @@ class DummyDataServer {
 
         //TODO: RUN COMMANDS HERE!!
 
+
+
+        // Add gold to empires
+        newState.empires.forEach(empire => {
+           newState.cities.map(city => {
+              if(empire.cities.includes(city.id)) {
+                  empire.gold += city.size;
+              }
+           });
+
+        });
 
         // Turn count up by 1
         newState.game.turn = this.stateHistory.length + 1;

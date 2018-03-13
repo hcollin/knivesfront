@@ -52,7 +52,7 @@ const testState = {
         {
             id: "stoc",
             name: "Stockholm",
-            size: 1,
+            size: 2,
             x: 10,
             y: 7,
             owner: "sver"
@@ -383,6 +383,7 @@ class DummyDataServer {
             this._removeCommandIfExists(cmd);
             cmd.id = uuid.v4();
             this.commands.push(cmd);
+            console.log("Commands:", this.commands);
             resolve(cmd.id);
         });
     }
@@ -401,8 +402,10 @@ class DummyDataServer {
         const index = this.commands.findIndex(ocmd => {
             return ocmd.id === cmd.id || ocmd.to === cmd.to;
         });
+        console.log("Remove?", cmd.type, cmd.to, index, this.commands[index]);
         if (index > -1) {
-            this.commands.splice(index, 1);
+            const removed = this.commands.splice(index, 1);
+            console.log("\tREMOVED", removed);
             return true;
         }
         return false;
@@ -448,16 +451,19 @@ class DummyDataServer {
     // Turn processing
     _processCommands(newState) {
 
+        console.log("\nCommands", this.commands.length, "\n", this.commands);
+
         // this.newState = Object.assign({}, this.gameState);
         const cmdOrder = [
-            {type: "INFRA", processor: this._cmdCityInfra.bind(this)}
+            {type: "CITY_INFRA", processor: this._cmdCityInfra.bind(this)},
+            {type: "CITY_HEAL", processor: this._cmdCityHeal.bind(this)},
+            {type: "CITY_BUILD", processor: this._cmdCityHeal.bind(this)}
         ];
 
-        cmdOrder.forEach(cmd => {
-            const cmds = this.commands.filter(cmd => cmd.type ===cmd.type);
-            cmds.map(command=> {
-                console.log(command);
-                cmd.processor(command, newState);
+        cmdOrder.forEach(commandType => {
+            const commandsForType = this.commands.filter(cmd => cmd.type === commandType.type);
+            commandsForType.map(command => {
+                commandType.processor(command, newState);
             });
         });
 
@@ -466,10 +472,20 @@ class DummyDataServer {
 
     _cmdCityInfra(command, newState) {
         console.log("SERVER:CMD:INFRA", command.to);
-        console.log("NEW STATE", newState);
 
         const cityIndex= newState.cities.findIndex(city => city.id === command.to);
         newState.cities[cityIndex].size++;
+    }
+
+    _cmdCityHeal(command, newState) {
+        console.log("SERVER:CMD:HEAL", command.to);
+
+        // const cityIndex= newState.cities.findIndex(city => city.id === command.to);
+        // newState.cities[cityIndex].size++;
+    }
+
+    _cmdCityBuild(command, newState) {
+        console.log("SERVER:CMD:BUILD", command.to, command.params);
     }
 
     _triggerStatePush(eventObject) {

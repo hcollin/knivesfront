@@ -1,6 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-
+import {observable, action } from 'mobx';
 
 import CommandService from '../../../Services/CommandService';
 import CityService from '../../../Services/CityService';
@@ -11,6 +11,8 @@ import ClientStore from '../../../Stores/ClientStore';
 import EmpireService from '../../../Services/EmpireService';
 
 import CmdInfra from './CmdInfra';
+import CmdHeal from './CmdHeal';
+import CmdBuild from './CmdBuild';
 
 import './cityinfoview.scss';
 import GameDataStore from "../../../Stores/GameDataStore";
@@ -18,8 +20,26 @@ import GameDataStore from "../../../Stores/GameDataStore";
 @observer
 export default class CityInfoView extends React.Component {
 
+
+    commandBuild() {
+
+    }
+
+    commandHeal() {
+        // console.log("HEAL!", ClientStore.selectedArea.city);
+        CommandService.healUnits(ClientStore.selectedArea.city);
+        this.showBuildUnits = false;
+    }
+
     commandInfra() {
+        // console.log("INFRA!", ClientStore.selectedArea.city);
         CommandService.growInfra(ClientStore.selectedArea.city);
+        this.showBuildUnits = false;
+    }
+
+
+    showAvailableUnits() {
+        this.showBuildUnits = true;
     }
 
     render() {
@@ -37,6 +57,7 @@ export default class CityInfoView extends React.Component {
 
 
 
+        const area = ClientStore.selectedArea;
         const city = CityService.getById(ClientStore.selectedArea.city.id);
 
         const showActions = city.owner && city.owner === ClientStore.activeEmpireId;
@@ -49,7 +70,10 @@ export default class CityInfoView extends React.Component {
         if(command) {
             switch(command.type) {
                 case "CITY_INFRA":
-                    commandInfo = <CmdInfra/>;
+                    commandInfo = <CmdInfra />;
+                    break;
+                case "CITY_HEAL":
+                    commandInfo = <CmdHeal />;
                     break;
             }
         }
@@ -61,6 +85,7 @@ export default class CityInfoView extends React.Component {
                     <div>
                         <h1>{city.name}</h1>
                         <h3 className="owner">{empire ? empire.name : "Neutral"}</h3>
+                        <h4>type <span>{area.type}</span>  x <span>{area.x}</span>, y <span>{area.y}</span></h4>
                     </div>
                     <div className="size">
                         <h2>{city.size}</h2>
@@ -70,9 +95,9 @@ export default class CityInfoView extends React.Component {
                 {showActions &&
                 <div className="commands">
                     <div className="buttons">
-                        <button className={"build" + (command && command.type==="BUILD" ? " current": "")} disabled={EmpireService.isDoneForTurn()}>Build</button>
-                        <button className={"heal" + (command && command.type==="HEAL" ? " current": "")} disabled={EmpireService.isDoneForTurn()}>Heal</button>
-                        <button className={"infra" + (command && command.type==="INFRA" ? " current": "")} onClick={() => this.commandInfra()} disabled={EmpireService.isDoneForTurn()}>Grow</button>
+                        <button className={"build" + (command && command.type === "CITY_BUILD" ? " current": "")}   disabled={EmpireService.isDoneForTurn()}>Build</button>
+                        <button className={"heal" + (command && command.type === "CITY_HEAL" ? " current": "")} onClick={() => this.commandHeal()} disabled={EmpireService.isDoneForTurn()}>Heal</button>
+                        <button className={"infra" + (command && command.type === "CITY_INFRA" ? " current": "")} onClick={() => this.commandInfra()} disabled={EmpireService.isDoneForTurn()}>Grow</button>
                     </div>
                     <div className="current">
                         {commandInfo}

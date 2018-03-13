@@ -31,30 +31,21 @@ class CommandService {
 
     // CITY COMMANDS
 
-    growInfra(targetCity) {
-
-        if(ClientStore.iAmDone) {
-            return;
-        }
-
-        console.log("CITY", targetCity);
-        if(CityService.isMyCity(targetCity)) {
-            const cmd = this._createCommandObject("CITY_INFRA", targetCity.id);
-            DummyDataServer.addCommand(cmd).then(
-                action(res => {
-                    console.log("Command added", res);
-                    cmd.id = res;
-                    this._addCurrentCommand(cmd);
-                }),
-                action(err => {
-                    console.log("All fail", err);
-                })
-            );
-        }
+    growInfra(targetCity=null) {
+        if(!targetCity) return;
+        return this._sendCityCommand("CITY_INFRA", targetCity);
     }
 
 
+    healUnits(targetCity=null) {
+        if(!targetCity) return;
+        return this._sendCityCommand("CITY_HEAL", targetCity);
+    }
 
+    buildUnit(targetCity=null, unitType=null) {
+        if(!targetCity || !unitType) return;
+        return this._sendCityCommand("CITY_BUILD", targetCity, {unit: unitType});
+    }
 
 
 
@@ -70,6 +61,27 @@ class CommandService {
             to: to,
             by: ClientStore.activeEmpireId,
             params: params
+        }
+    }
+
+    _sendCityCommand(type, to, params={}) {
+        if(ClientStore.iAmDone) {
+            return;
+        }
+
+
+        if(CityService.isMyCity(to)) {
+            const cmd = this._createCommandObject(type, to.id, params);
+            DummyDataServer.addCommand(cmd).then(
+                action(res => {
+                    console.log("Command added", res);
+                    cmd.id = res;
+                    this._addCurrentCommand(cmd);
+                }),
+                action(err => {
+                    console.log("All fail", err);
+                })
+            );
         }
     }
 

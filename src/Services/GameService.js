@@ -34,7 +34,11 @@ class GameService {
         console.log("NEW TURN STATE!", newStateData);
         GameDataStore.setState(newStateData);
         ClientStore.setActiveEmpire(EmpireService.getById(ClientStore.activeEmpireId));
-        ClientStore.setSelectedArea(null);
+        if(ClientStore.selectedArea) {
+            ClientStore.selectedArea.deactivate();
+            ClientStore.setSelectedArea(null);
+        }
+
 
     }
 

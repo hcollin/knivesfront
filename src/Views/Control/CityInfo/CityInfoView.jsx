@@ -17,6 +17,7 @@ import CmdBuild from './CmdBuild';
 import './cityinfoview.scss';
 import GameDataStore from "../../../Stores/GameDataStore";
 
+
 @observer
 export default class CityInfoView extends React.Component {
 
@@ -28,13 +29,13 @@ export default class CityInfoView extends React.Component {
     commandHeal() {
         // console.log("HEAL!", ClientStore.selectedArea.city);
         CommandService.healUnits(ClientStore.selectedArea.city);
-        this.showBuildUnits = false;
+
     }
 
     commandInfra() {
         // console.log("INFRA!", ClientStore.selectedArea.city);
         CommandService.growInfra(ClientStore.selectedArea.city);
-        this.showBuildUnits = false;
+
     }
 
 

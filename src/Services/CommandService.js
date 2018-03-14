@@ -85,8 +85,14 @@ class CommandService {
         }
     }
 
+
+
     @action
     _addCurrentCommand(cmd) {
+        const index = this.currentCommands.findIndex(cc => cc.to === cmd.to);
+        if(index > -1) {
+            this.currentCommands.splice(index, 1);
+        }
         this.currentCommands.push(cmd);
     }
 

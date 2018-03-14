@@ -383,7 +383,6 @@ class DummyDataServer {
             this._removeCommandIfExists(cmd);
             cmd.id = uuid.v4();
             this.commands.push(cmd);
-            console.log("Commands:", this.commands);
             resolve(cmd.id);
         });
     }

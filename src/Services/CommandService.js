@@ -42,6 +42,14 @@ class CommandService {
         return this._sendCityCommand("CITY_HEAL", targetCity);
     }
 
+    showUnits(targetCity) {
+        this.currentCommands = this.currentCommands.filter(cmd => cmd.type !== "TEMP_UNIT");
+        this.currentCommands.push({
+            type: "TEMP_UNIT",
+            to: targetCity.id
+        })
+    }
+
     buildUnit(targetCity=null, unitType=null) {
         if(!targetCity || !unitType) return;
         return this._sendCityCommand("CITY_BUILD", targetCity, {unit: unitType});

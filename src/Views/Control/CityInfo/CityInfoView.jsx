@@ -35,12 +35,11 @@ export default class CityInfoView extends React.Component {
     commandInfra() {
         // console.log("INFRA!", ClientStore.selectedArea.city);
         CommandService.growInfra(ClientStore.selectedArea.city);
-
     }
 
 
     showAvailableUnits() {
-        this.showBuildUnits = true;
+        CommandService.showUnits(ClientStore.selectedArea.city);
     }
 
     render() {
@@ -76,6 +75,11 @@ export default class CityInfoView extends React.Component {
                 case "CITY_HEAL":
                     commandInfo = <CmdHeal />;
                     break;
+                case "CITY_BUID":
+                    commandInfo = <CmdBuild/>;
+                    break;
+                case "TEMP_UNIT":
+                    commandInfo = <CmdBuild to={city} />;
             }
         }
 
@@ -96,7 +100,7 @@ export default class CityInfoView extends React.Component {
                 {showActions &&
                 <div className="commands">
                     <div className="buttons">
-                        <button className={"build" + (command && command.type === "CITY_BUILD" ? " current": "")}   disabled={EmpireService.isDoneForTurn()}>Build</button>
+                        <button className={"build" + (command && command.type === "CITY_BUILD" ? " current": "")} onClick={() => this.showAvailableUnits()}  disabled={EmpireService.isDoneForTurn()}>Build</button>
                         <button className={"heal" + (command && command.type === "CITY_HEAL" ? " current": "")} onClick={() => this.commandHeal()} disabled={EmpireService.isDoneForTurn()}>Heal</button>
                         <button className={"infra" + (command && command.type === "CITY_INFRA" ? " current": "")} onClick={() => this.commandInfra()} disabled={EmpireService.isDoneForTurn()}>Grow</button>
                     </div>

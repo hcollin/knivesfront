@@ -10,6 +10,8 @@ import HexInfoView from './AreaInfo/HexInfoView';
 import EmpireListView from './EmpireList/EmpireListView';
 import TechInfoView from './TechInfo/TechInfoView';
 import NextTurnView from "./TurnInfo/NextTurnView";
+import UnitInfoView from "./UnitInfo/UnitInfoView";
+
 
 import CityService from '../../Services/CityService';
 import MapStore from '../../Stores/MapStore';
@@ -31,6 +33,7 @@ export default class ControlView extends React.Component {
                 <MyEmpireView />
                 {/*<HexInfoView />*/}
                 <CityInfoView />
+                <UnitInfoView/>
                 <TechInfoView />
                 <EmpireListView />
 

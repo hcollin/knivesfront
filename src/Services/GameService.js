@@ -12,8 +12,12 @@ class GameService {
         MapStore.createMapFromData(GameDataStore.state.map);
 
         // Add cities
-        GameDataStore.state.cities.forEach(city => {
+        GameDataStore.state.cities.map(city => {
              MapStore.addCity(city);
+        });
+
+        GameDataStore.state.units.map(unit => {
+            MapStore.addUnit(unit);
         });
 
         // Create empires and set active empire

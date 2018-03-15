@@ -95,6 +95,11 @@ class MapStore {
     }
 
     @action
+    addUnit(unit) {
+        this.hexes[unit.y][unit.x].setUnit(unit);
+    }
+
+    @action
     zoomIn() {
         if(this.currentZoom > 0) {
             this.currentZoom--;

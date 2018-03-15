@@ -41,6 +41,8 @@
     justify-content: center;
     align-items: center;
 
+    z-index: 10;
+
     &:before {
       font-family: "FontAwesome";
       content: "\f1ad";
@@ -70,5 +72,17 @@
       position: absolute;
 
     }
+  }
+
+  div.unit {
+    font-size: 8px;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    z-index: 20;
+
   }
 }

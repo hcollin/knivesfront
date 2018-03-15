@@ -68,18 +68,21 @@ export default class CityInfoView extends React.Component {
 
         let commandInfo = null;
         if(command) {
+            console.log("Command for city", command);
             switch(command.type) {
-                case "CITY_INFRA":
-                    commandInfo = <CmdInfra />;
-                    break;
-                case "CITY_HEAL":
-                    commandInfo = <CmdHeal />;
-                    break;
-                case "CITY_BUID":
-                    commandInfo = <CmdBuild/>;
-                    break;
                 case "TEMP_UNIT":
                     commandInfo = <CmdBuild to={city} />;
+                    break;
+                case "CITY_INFRA":
+                    commandInfo = <CmdInfra cmd={command} />;
+                    break;
+                case "CITY_HEAL":
+                    commandInfo = <CmdHeal cmd={command} />;
+                    break;
+                case "CITY_BUILD":
+                    commandInfo = <CmdBuild cmd={command} />;
+                    break;
+
             }
         }
 

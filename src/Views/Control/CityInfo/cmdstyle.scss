@@ -1,4 +1,5 @@
 
+
 .commandinfo {
 
     h1 {
@@ -12,5 +13,25 @@
       font-size: 1em;
       font-weight: 400;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .buttongrid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      button {
+        flex: 1 1 auto;
+        width: 30%;
+        margin: 1px 1px;
+        height: 40px;
+        background: linear-gradient(#666 0%, #AAA 20%, #DDD 50%, #AAA 80%, #666 100%);
+        border-radius: 8px;
+        box-shadow: inset 0 0 10px 5px rgba(0,0,0,0.3);
+
+        img {
+          height: 34px;
+        }
+      }
     }
 }

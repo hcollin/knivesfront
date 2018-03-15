@@ -415,7 +415,6 @@ class DummyDataServer {
         this.stateHistory.push(this.currentState.cloneMe());
         let newState = GameState.cloneState(this.currentState);
 
-        //TODO: RUN COMMANDS HERE!!
         newState = this._processCommands(newState);
 
 

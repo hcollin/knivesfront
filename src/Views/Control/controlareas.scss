@@ -81,6 +81,19 @@
     }
   }
 
+  &.closed {
+
+    & > * {
+      display: none
+
+    }
+
+    & > div.title {
+      display: block;
+    }
+
+  }
+
 }
 
 @mixin iconAndTextButton($icon) {

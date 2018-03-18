@@ -12,6 +12,7 @@ import TechInfoView from './TechInfo/TechInfoView';
 import NextTurnView from "./TurnInfo/NextTurnView";
 import UnitInfoView from "./UnitInfo/UnitInfoView";
 
+import ClientStore from '../../Stores/ClientStore';
 
 import CityService from '../../Services/CityService';
 import MapStore from '../../Stores/MapStore';
@@ -23,7 +24,7 @@ export default class ControlView extends React.Component {
     render() {
 
 
-
+        const areaSelected = ClientStore.selectedArea !== null;
 
         return (
             <div className="controlview">

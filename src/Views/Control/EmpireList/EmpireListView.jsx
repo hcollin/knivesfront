@@ -18,6 +18,13 @@ export default class EmpireListView extends React.Component {
 
     render() {
 
+        if(ClientStore.selectedArea) {
+            return (
+                <div className="empirelistview">
+                    <div className="title">Diplomatic Relations</div>
+                </div>
+            );
+        }
 
 
         return (

@@ -33,6 +33,33 @@
       font-size: 32px;
       letter-spacing: 0.5px;
       font-weight: 700;
+      text-align: right;
+
+
+
+      .power {
+
+        &:before {
+          content: " ";
+          width: 16px;
+          height: 16px;
+          margin-right: 3px;
+          display: inline-block;
+          background: url('../../../imgs/iconPowerDark.svg');
+        }
+      }
+
+      .health{
+
+        &:before {
+          content: " ";
+          width: 16px;
+          height: 16px;
+          margin-right: 3px;
+          display: inline-block;
+          background: url('../../../imgs/iconHealthDark.svg');
+        }
+      }
     }
 
     h3 {

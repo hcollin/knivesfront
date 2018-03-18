@@ -11,8 +11,8 @@ class ClientStore {
 
     @action
     setSelectedArea(area) {
-        if(area=== null) {
-
+        if(!area) {
+            area = null;
         }
         this.selectedArea = area;
     }

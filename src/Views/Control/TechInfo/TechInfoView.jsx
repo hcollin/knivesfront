@@ -8,11 +8,20 @@ import GameStore from '../../../Stores/GameStore';
 import TechService from '../../../Services/TechService';
 
 import './techinfoview.scss';
+import ClientStore from "../../../Stores/ClientStore";
 
 @observer
 export default class TechInfoView extends React.Component {
 
     render() {
+
+        if(ClientStore.selectedArea) {
+            return (
+                <div className="techinfoview">
+                    <div className="title">Research Department</div>
+                </div>
+            );
+        }
 
         const available = TechService.getAvailableTech();
         const library = TechService.getMyTech();

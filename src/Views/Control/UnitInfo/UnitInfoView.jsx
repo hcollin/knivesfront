@@ -25,9 +25,6 @@ export default class UnitInfoView extends React.Component {
             return (
                 <div className="unitinfoview">
                     <div className="title">Units in area</div>
-                    <div className="message">
-                        <p>No area with unit or units selected.</p>
-                    </div>
                 </div>
             );
         }
@@ -49,7 +46,7 @@ export default class UnitInfoView extends React.Component {
 
                     </div>
                     <div className="size">
-                        <h2><span className="power">55</span><br /><span className="health">{unit.health}</span></h2>
+                        <h2><span className="power">{unit.power}</span><br /><span className="health">{unit.health}</span></h2>
                     </div>
 
                 </div>

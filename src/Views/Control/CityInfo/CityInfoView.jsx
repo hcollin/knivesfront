@@ -48,9 +48,6 @@ export default class CityInfoView extends React.Component {
             return (
               <div className="cityinfoview">
                   <div className="title">Infrastructure</div>
-                  <div className="message">
-                      <p>No area with city selected.</p>
-                  </div>
               </div>
             );
         }

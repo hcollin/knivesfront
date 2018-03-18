@@ -15,10 +15,16 @@ export default class MapView extends React.Component {
 
     @action
     hexClick(hex) {
-        console.log("Clicked hex", hex.x, hex.y, hex);
+        // console.log("Clicked hex", hex.x, hex.y, hex);
+        if(ClientStore.clickMapCallback !== null) {
+            if(!ClientStore.clickMapCallback(hex)) {
+                return;
+            }
+        }
         if(this.activeHex) {
             const oldId = this.activeHex.id;
             this.activeHex.deactivate();
+            MapStore.setHighlights([]);
             if(oldId === hex.id) {
                 this.activeHex = null;
                 ClientStore.setSelectedArea(null);
@@ -61,7 +67,7 @@ export default class MapView extends React.Component {
                     return (
                         <div className="row" key={r}>
                             {row.map((hex, hi) => (
-                                <HexTile key={hi} hex={hex} handleClick={() => this.hexClick(hex)}/>
+                                <HexTile key={hi} hex={hex} handleClick={() => this.hexClick(hex)} highlighted={MapStore.isHighlighted(hex.x, hex.y)}/>
                             ))}
                         </div>
                     )

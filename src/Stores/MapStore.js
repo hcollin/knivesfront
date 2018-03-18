@@ -18,6 +18,8 @@ class MapStore {
     @observable panx = 0;
     @observable pany = 0;
 
+    @observable highlights = [];
+
     @action
     createNewRandomMap(widthHexes=10, heightHexes=10) {
 
@@ -87,6 +89,22 @@ class MapStore {
 
     }
 
+
+    @action
+    setHighlights(highlights) {
+        this.highlights = highlights;
+    }
+
+    isHighlighted(x, y) {
+        return this.highlights.findIndex(obj => {
+            return obj.x === x && obj.y === y;
+        }) > -1;
+    }
+
+    getHex(x,y) {
+        if(x < 0 || x > this.width || y < 0 || y > this.height) return null;
+        return this.hexes[y][x];
+    }
 
     @action
     addCity(city) {

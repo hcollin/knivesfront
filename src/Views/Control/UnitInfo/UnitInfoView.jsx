@@ -7,6 +7,7 @@ import CityService from '../../../Services/CityService';
 import GameStore from '../../../Stores/GameStore';
 
 import ClientStore from '../../../Stores/ClientStore';
+import MapStore from '../../../Stores/MapStore';
 
 import EmpireService from '../../../Services/EmpireService';
 import UnitService from "../../../Services/UnitService";
@@ -20,8 +21,38 @@ import './unitinfoview.scss';
 export default class UnitInfoView extends React.Component {
 
 
+    commandMove(unit, hex) {
+        CommandService.moveUnit(unit, hex);
+    }
+
+    showMoves(unit) {
+        console.log("MOVE!", unit);
+        const valids = UnitService.getValidMoveCoords(unit);
+        MapStore.setHighlights(valids);
+        ClientStore.setClickCallback((hex) => {
+            const isValidTarget = valids.findIndex(coords => {
+                return coords.x === hex.x && coords.y === hex.y;
+            }) > -1;
+            if(isValidTarget) {
+                console.log("Move unit " + unit.name + " to hex ", hex);
+                this.commandMove(unit,hex);
+                ClientStore.setClickCallback(null);
+            }
+            return true;
+        });
+        console.log("Valid moves", valids);
+    }
+
+
+
+
     render() {
-        if(!ClientStore.selectedArea || !ClientStore.selectedArea.unit) {
+
+        const area = ClientStore.selectedArea;
+        const unit = area ? UnitService.getByCoord(area.x, area.y) : false;
+
+
+        if(!area || !unit) {
             return (
                 <div className="unitinfoview">
                     <div className="title">Units in area</div>
@@ -29,10 +60,16 @@ export default class UnitInfoView extends React.Component {
             );
         }
 
-        const area = ClientStore.selectedArea;
-        const unit = UnitService.getById(area.unit.id);
+        // const area = ClientStore.selectedArea;
+        // const unit = UnitService.getById(area.unit.id);
 
         const empire = unit.owner ? EmpireService.getById(unit.owner) : false;
+
+
+        const showActions = unit.owner && unit.owner === ClientStore.activeEmpireId;
+
+        const command = CommandService.getCommand(unit.id);
+        console.log("UNIT COMMAND", command);
 
         console.log("UNIT", unit);
 
@@ -50,6 +87,22 @@ export default class UnitInfoView extends React.Component {
                     </div>
 
                 </div>
+                {showActions &&
+                <div className="commands">
+                    <div className="buttons">
+                        <button className="move" onClick={() => this.showMoves(unit)} disabled={EmpireService.isDoneForTurn()}>Move</button>
+                        <button className="support">Support</button>
+
+                        {/*<button className={"build" + (command && command.type === "CITY_BUILD" ? " current": "")} onClick={() => this.showAvailableUnits()}  disabled={EmpireService.isDoneForTurn()}>Build</button>*/}
+                        {/*<button className={"heal" + (command && command.type === "CITY_HEAL" ? " current": "")} onClick={() => this.commandHeal()} disabled={EmpireService.isDoneForTurn()}>Heal</button>*/}
+                        {/*<button className={"infra" + (command && command.type === "CITY_INFRA" ? " current": "")} onClick={() => this.commandInfra()} disabled={EmpireService.isDoneForTurn()}>Grow</button>*/}
+                    </div>
+                    <div className="current">
+                        Comms
+                    </div>
+
+                </div>
+                }
             </div>
         )
 

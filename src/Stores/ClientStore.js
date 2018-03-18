@@ -9,12 +9,19 @@ class ClientStore {
 
     @observable iAmDone = false;
 
+    @observable clickMapCallback = null;
+
     @action
     setSelectedArea(area) {
         if(!area) {
             area = null;
         }
         this.selectedArea = area;
+    }
+
+    @action
+    setClickCallback(cb) {
+        this.clickMapCallback = cb;
     }
 
     @action

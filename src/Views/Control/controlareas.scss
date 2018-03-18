@@ -72,6 +72,14 @@
         @include iconAndTextButton('\f1ad');
       }
 
+      button.move {
+        @include iconAndTextButton('\f0b2');
+      }
+
+      button.support {
+        @include iconAndTextButton('\f0a1');
+      }
+
     }
 
     div.current {

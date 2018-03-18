@@ -1,204 +1,10 @@
 import uuid from 'uuid';
 
 import { defaultMap } from '../Data/Maps/default';
+import { testMap } from '../Data/Maps/test';
+import { nordicMap } from '../Data/Maps/nordic';
 
-const testState = {
-    game: {
-        id: null,
-        turn: 1
-    },
-    map: [
-        "WWWWWWLLLLLLWWW",
-        "WWWLLLLLLLLLLWW",
-        "WWLLLMMMMLLLLWW",
-        "WLLLMLLMMMLLLWW",
-        "LLLLLLLLLLLLLLW",
-        "LLLLLLWWLLLLLLL",
-        "LLLWWWWWLLLLLLL",
-        "LLLLWWWWWWLLLLL",
-        "LLLLLLWWWWWWLLL",
-        "LLLLLLWWLLLWWWL",
-        "LLLLLLWLLLLLLLW",
-        "LLLLLLLLLLLLLLL",
-        "LLLLLLLLLLLLLLL",
-        "LLLLLLWWWLLLLLL",
-        "LLLLWWWWWWLLLLL"
-    ],
-    cities: [
-        {
-            id: "hels",
-            name: "Helsinki",
-            size: 2,
-            x: 3,
-            y: 1,
-            owner: "finl"
-        },
-        {
-            id: "tamp",
-            name: "Tampere",
-            size: 1,
-            x: 2,
-            y: 3,
-            owner: "finl"
-        },
-        {
-            id: "turk",
-            name: "Turku",
-            size: 1,
-            x: 7,
-            y: 1,
-            owner: "finl"
-        },
-        {
-            id: "stoc",
-            name: "Stockholm",
-            size: 2,
-            x: 10,
-            y: 7,
-            owner: "sver"
-        },
-        {
-            id: "malm",
-            name: "Malmö",
-            size: 1,
-            x: 13,
-            y: 8,
-            owner: "sver"
-        },
-        {
-            id: "upps",
-            name: "Uppsala",
-            size: 1,
-            x: 13,
-            y: 6,
-            owner: "sver"
-        },
-        {
-            id: "berl",
-            name: "Berlin",
-            x: 5,
-            y: 9,
-            size: 2,
-            owner: "germ"
-        },
-        {
-            id: "bonn",
-            name: "Bonn",
-            x: 3,
-            y: 8,
-            size: 1,
-            owner: "germ"
-        },
-        {
-            id: "munc",
-            name: "Munchen",
-            x: 3,
-            y: 11,
-            size:1,
-            owner: "germ"
-        },
-        {
-            id: "bott",
-            name: "Bottlepeck",
-            x: 1,
-            y: 6,
-            size: 1,
-            owner: null
-        },
-        {
-            id: "loot",
-            name: "Lootville",
-            x: 6,
-            y: 3,
-            size: 1,
-            owner: null
-        },
-        {
-            id: "pill",
-            name: "Pillaburg",
-            x: 12,
-            y: 3,
-            size: 1,
-            owner: null
-        }
-    ],
-    empires: [
-        {
-            id: "finl",
-            name: "Finlande",
-            color: "#4444FF",
-            bgColor: "#FFFFFF",
-            capital: "hels",
-            cities: [ "hels", "turk",  "tamp" ],
-            gold: 5,
-            techs: [],
-            allies: [],
-            wars: [],
-            doneForTurn: false
-
-        },
-        {
-            id: "sver",
-            name: "Sverrige",
-            color: "#FFFF44",
-            bgColor: "#0000FF",
-            capital: "stoc",
-            cities: [ "stoc", "upps", "malm"],
-            gold: 5,
-            techs: [],
-            allies: [],
-            wars: [],
-            doneForTurn: false
-        },
-        {
-            id: "germ",
-            name: "Germsmany",
-            color: "yellow",
-            bgColor: "red",
-            capital: "berl",
-            cities: ["berl", "bonn", "munc"],
-            gold: 5,
-            techs: [],
-            allies: [],
-            wars: [],
-            doneForTurn: false
-        }
-    ],
-    units: [
-        {
-            id: "inf1",
-            type: "INF",
-            name: "Infantry",
-            x: 3,
-            y: 1,
-            health: 10,
-            flags: [],
-            owner: "finl"
-        },
-        {
-            id: "inf2",
-            type: "INF",
-            name: "Infantry",
-            x: 10,
-            y: 7,
-            health: 10,
-            flags: [],
-            owner: "sver"
-        },
-        {
-            id: "inf3",
-            type: "INF",
-            name: "Infantry",
-            x: 5,
-            y: 9,
-            health: 10,
-            flags: [],
-            owner: "germ"
-        }
-    ],
-    commands: []
-};
-
+const testState = nordicMap;
 
 
 
@@ -261,6 +67,52 @@ function deepishClone(orig) {
         return cloneObject(orig);
     }
     return orig;
+}
+
+
+class Combat {
+
+    constructor() {
+        this.conflicts = {};
+        this.units = [];
+        this.supporting = [];
+    }
+
+    addUnit(unit) {
+        const key = unit.x + "-"+unit.y;
+        if(!this.conflicts[key]) {
+            this.conflicts[key] = [];
+        }
+        const participant = {
+            unit: unit,
+            side: unit.owner,
+            type: "FULL"
+        };
+        this.conflicts[key].push(participant);
+    }
+
+    addSupport(unit, toCoords) {
+        const key = toCoords.x + "-"+toCoords.y;
+        if(!this.conflicts[key]) {
+            this.conflicts[key] = [];
+        }
+        const participant = {
+            unit: unit,
+            side: unit.owner,
+            type: "SUPPORT"
+        };
+        this.conflicts[key].push(participant);
+
+    }
+
+    fight() {
+        Object.keys(this.conflicts).map(participants => {
+
+        })
+    }
+
+
+
 }
 
 
@@ -417,6 +269,9 @@ class DummyDataServer {
 
         newState = this._processCommands(newState);
 
+        // Check conquered cities
+        this._conquestOfCities(newState);
+
 
         // Add gold to empires
         newState.empires.forEach(empire => {
@@ -446,6 +301,66 @@ class DummyDataServer {
         this._triggerStatePush({action: "NEWTURN", data: this.currentState.cloneMe()});
     }
 
+
+    /**
+     * COMBAT RESOLVER!
+     * @param newState
+     * @private
+     */
+    _combat(newState) {
+        console.log("COMBAT", newState);
+
+        const combat = new Combat();
+
+        newState.units.map(unit => {
+            combat.addUnit(unit);
+        });
+
+        combat.fight();
+
+
+        // const unitsInAreas = {};
+        // newState.units.map(unit => {
+        //     const key = unit.x + "-"+unit.y;
+        //     if(unitsInAreas[key] === undefined) {
+        //         unitsInAreas[key] = [];
+        //     }
+        //     unitsInAreas[key].push(unit);
+        // });
+        //
+        // const combats = [];
+        //
+        // Object.keys(unitsInAreas).map(key => {
+        //     if(unitsInAreas[key].length > 1) {
+        //         const conflict = new Combat(unitsInAreas[key], newState.units);
+        //         conflict.
+        //     }
+        // });
+        //
+        // combats.map(combat => {
+        //     console.log("\tUnits in combat:", combat);
+        //     combat.map(attacker => {
+        //         combat.forEach(defender => {
+        //             if(defender.id !== attacker.id) {
+        //                 defender.health -= attacker.power;
+        //             }
+        //         })
+        //     });
+        // })
+
+    }
+
+    /**
+     * Check who controls which city
+     * @param newState
+     * @private
+     */
+    _conquestOfCities(newState) {
+        // newState.units.map(unit => {
+        //
+        // });
+    }
+
     // Turn processing
     _processCommands(newState) {
 
@@ -453,19 +368,40 @@ class DummyDataServer {
 
         // this.newState = Object.assign({}, this.gameState);
         const cmdOrder = [
-            {type: "CITY_INFRA", processor: this._cmdCityInfra.bind(this)},
+            {type: "UNIT_MOVE", processor: this._cmdUnitMove.bind(this)},
+            {type: "UNIT_SUPPORT", processor: this._cmdUnitSupport.bind(this)},
+            {do: this._combat.bind(this)},
+
             {type: "CITY_HEAL", processor: this._cmdCityHeal.bind(this)},
+            {type: "CITY_INFRA", processor: this._cmdCityInfra.bind(this)},
             {type: "CITY_BUILD", processor: this._cmdCityHeal.bind(this)}
         ];
 
         cmdOrder.forEach(commandType => {
-            const commandsForType = this.commands.filter(cmd => cmd.type === commandType.type);
-            commandsForType.map(command => {
-                commandType.processor(command, newState);
-            });
+            if(commandType.do) {
+                commandType.do(newState);
+            } else {
+                const commandsForType = this.commands.filter(cmd => cmd.type === commandType.type);
+                commandsForType.map(command => {
+                    commandType.processor(command, newState);
+                });
+            }
         });
 
         return newState;
+    }
+
+
+    _cmdUnitMove(command, newState) {
+        console.log("SERVER:CMD:MOVE", command.to);
+        const unitIndex = newState.units.findIndex(unit => unit.id === command.to);
+        console.log("SERVER:CMD:MOVE", command.to, unitIndex, command.params);
+        newState.units[unitIndex].x = command.params.x;
+        newState.units[unitIndex].y = command.params.y;
+    }
+
+    _cmdUnitSupport(command, newState) {
+        console.log("SERVER:CMD:SUPPORT", command);
     }
 
     _cmdCityInfra(command, newState) {

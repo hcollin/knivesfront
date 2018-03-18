@@ -55,8 +55,12 @@ class ActionService {
     nextTurn() {
         DummyDataServer.empireIsReady(ClientStore.activeEmpireId).then(res => {
             console.log("Turn Done");
+            if(ClientStore.selectedArea) {
+                ClientStore.selectedArea.deactivate();
+                ClientStore.setSelectedArea(null);
+            }
         }).catch(err => {
-            console.error("Turn confirmation failed");
+            console.error("Turn confirmation failed", err);
         });
     }
 

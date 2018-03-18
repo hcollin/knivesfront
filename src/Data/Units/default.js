@@ -7,7 +7,8 @@ const defaultUnits = {
         power: 10,
         type: "INF",
         cost: 3,
-        upkeep: 1
+        upkeep: 1,
+        canMoveIn: ["LAND", "CITY", "CONVOY"]
     },
     "TNK": {
         name: "Tank",
@@ -16,7 +17,8 @@ const defaultUnits = {
         power: 20,
         type: "TNK",
         cost: 7,
-        upkeep: 3
+        upkeep: 3,
+        canMoveIn: ["LAND", "CITY", "CONVOY"]
     },
     "FLE": {
         name: "Destroyer",
@@ -25,7 +27,8 @@ const defaultUnits = {
         power: 10,
         type: "FLE",
         cost: 4,
-        upkeep: 2
+        upkeep: 2,
+        canMoveIn: ["WATER", "CITY"]
     },
     "BTS": {
         name: "Battleship",
@@ -34,7 +37,9 @@ const defaultUnits = {
         power: 20,
         type: "FLE",
         cost: 9,
-        upkeep: 2
+        upkeep: 2,
+        canMoveIn: ["WATER", "CITY"]
+
     },
     "FGH": {
         name: "Fighter",
@@ -43,7 +48,8 @@ const defaultUnits = {
         power: 5,
         type: "FGH",
         cost: 5,
-        upkeep: 1
+        upkeep: 1,
+        canMoveIn: ["CITY"]
     },
     "BMB": {
         name: "Bomber",
@@ -52,7 +58,8 @@ const defaultUnits = {
         power: 5,
         type: "BMB",
         cost: 7,
-        upkeep: 2
+        upkeep: 2,
+        canMoveIn: ["CITY"]
     }
 };
 

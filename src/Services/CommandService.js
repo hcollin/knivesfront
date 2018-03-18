@@ -7,9 +7,7 @@ import ClientStore from "../Stores/ClientStore";
 import GameDataStore from "../Stores/GameDataStore";
 import DummyDataServer from "./DummyDataServer";
 import CityService from "./CityService";
-
-
-
+import UnitService from "./UnitService";
 
 class CommandService {
 
@@ -60,6 +58,10 @@ class CommandService {
 
     // UNIT COMMANDS
 
+    moveUnit(unit, toHex) {
+        if(!unit || !toHex) return;
+        return this._sendUnitCommand("UNIT_MOVE", unit, {x: toHex.x, y: toHex.y});
+    }
 
 
     // PRIVATE COMMANDS
@@ -93,6 +95,26 @@ class CommandService {
             );
         }
     }
+
+    _sendUnitCommand(type, unit, params) {
+        if(ClientStore.iAmDone) {
+            return;
+        }
+        if(UnitService.isMyUnit(unit)) {
+            const cmd = this._createCommandObject(type, unit.id, params);
+            DummyDataServer.addCommand(cmd).then(
+                action(res => {
+                    console.log("Command added", res);
+                    cmd.id = res;
+                    this._addCurrentCommand(cmd);
+                }),
+                action(err => {
+                    console.log("All fail", err);
+                })
+            );
+        }
+    }
+
 
 
 

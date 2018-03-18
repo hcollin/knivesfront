@@ -1,6 +1,6 @@
 
 .hextile {
-  border: solid 1px rgba(0,0,0,0.5);
+  border: solid 1px rgba(0, 0, 0, 0.5);
   position: relative;
 
   &.active {
@@ -19,7 +19,7 @@
     background-color: sandybrown;
   }
 
-  &.MOUNTAIN{
+  &.MOUNTAIN {
     background-color: gray;
   }
 
@@ -28,61 +28,100 @@
     color: white;
   }
 
-  div.city {
+  &.city {
 
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    z-index: 10;
 
     &:before {
       font-family: "FontAwesome";
       content: "\f1ad";
       font-size: 40px;
-
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       user-select: none;
-
+      color: rgba(64,64,64,0.8);
+      z-index: 10;
     }
 
-    label {
-      color: white;
+    div.city {
+      z-index: 20;
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 100%;
-      text-align: center;
-      text-transform: uppercase;
-      user-select: none;
+      right: 0;
+
+      height: 25%;
+      min-height: 20px;
+
+      display: flex;
+      flex-direction: row;
+
+
+      label {
+        flex: 4 4 auto;
+        padding-left: 2px;
+        width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      span {
+        flex: 1 1 auto;
+        width: 20%;
+        min-width: 10px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 700;
+
+        border-top-left-radius: 20% 50%;
+        border-bottom-left-radius: 20% 50%;
+
+        color: black;
+        box-shadow: -3px 0 5px 2px rgba(0,0,0,0.3);
+      }
     }
 
-    span {
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
-      user-select: none;
-      padding-bottom: 0.3em;
-      position: absolute;
-
-    }
   }
 
   div.unit {
-    font-size: 8px;
-    color: white;
     position: absolute;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 50%;
-    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+
+    .uniticon {
+      width: 80%;
+      height: 80%;
+      border: solid 2px black;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.7;
+
+      img {
+        width: 70%;
+        height: 70%;
+        opacity: 1;
+      }
+
+    }
 
   }
 }

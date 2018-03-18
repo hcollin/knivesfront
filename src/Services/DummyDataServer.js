@@ -4,6 +4,8 @@ import { defaultMap } from '../Data/Maps/default';
 import { testMap } from '../Data/Maps/test';
 import { nordicMap } from '../Data/Maps/nordic';
 
+import { defaultUnits} from '../Data/Units/default';
+
 const testState = nordicMap;
 
 
@@ -85,6 +87,7 @@ class Combat {
         }
         const participant = {
             unit: unit,
+            stats: Object.assign({}, defaultUnits[unit.type], unit),
             side: unit.owner,
             type: "FULL"
         };
@@ -98,6 +101,7 @@ class Combat {
         }
         const participant = {
             unit: unit,
+            stats: Object.assign({}, defaultUnits[unit.type], unit),
             side: unit.owner,
             type: "SUPPORT"
         };
@@ -106,8 +110,13 @@ class Combat {
     }
 
     fight() {
-        Object.keys(this.conflicts).map(participants => {
+        Object.keys(this.conflicts).map(key=> {
+            const participants = this.conflicts[key];
+            if(participants.length > 1) {
+                console.log("\tCombat!", key, participants);
 
+
+            }
         })
     }
 
